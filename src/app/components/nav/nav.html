@@ -1,38 +1,21 @@
-<nav class="bg-white shadow-lg">
-  <div class="max-w-7xl mx-auto px-4">
-    <div class="flex justify-between h-16">
-      <div class="flex items-center">
-        <div class="shrink-0">
-          <ng-icon name="faHome" class="text-blue-600 text-2xl"></ng-icon>
-        </div>
-        <div class="hidden md:block ml-10">
-          <div class="flex items-baseline space-x-4">
-            <a
-              href="#"
-              class="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium flex items-center"
-            >
-              <ng-icon name="faHome" class="mr-2"></ng-icon>
-              Inicio
-            </a>
-            <a
-              href="#"
-              class="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium flex items-center"
-            >
-              <ng-icon name="faInfoCircle" class="mr-2"></ng-icon>
-              Acerca de
-            </a>
-          </div>
-        </div>
+<nav class="p-4 flex justify-between items-center">
+  <div class="flex gap-2">
+    <div>
+      <img class="w-14 h-14 bg-black rounded-full" src="https://i.pinimg.com/736x/25/12/b6/2512b69f4bb9e52d58d557fccb0efcb8.jpg" alt="User Avatar">
+    </div>
+    <div>
+      <div>
+        <span class="text-gray-500 text-sm">Hello Jonny</span>
       </div>
-      <div class="flex items-center">
-        <button class="text-gray-900 hover:text-blue-600 p-2 rounded-md flex items-center">
-          <ng-icon name="faUser" class="mr-2"></ng-icon>
-          Mi cuenta
-        </button>
-        <button class="md:hidden ml-2 p-2 rounded-md text-gray-900 hover:text-blue-600">
-          <ng-icon name="faBars"></ng-icon>
-        </button>
+      <div class="flex items-center gap-1">
+        <lucide-icon [img]="MapPin" class="w-4 h-4"></lucide-icon>
+        <span class="text-lg font-semibold">Argentina</span>
       </div>
     </div>
+  </div>
+  <div>
+    <button class=" rounded-full bg-white p-3">
+      <lucide-icon [img]="BellDot" class="w-6 h-6"></lucide-icon>
+    </button>
   </div>
 </nav>

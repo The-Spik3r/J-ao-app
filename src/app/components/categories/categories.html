@@ -1,0 +1,43 @@
+<div class="w-full h-full p-2 flex flex-col gap-4">
+  <div class="w-full h-[30%] bg-red-500 rounded-2xl">
+    <div class="flex">
+      <div class="text-white flex flex-col gap-3 p-4">
+        <div>
+          <h1 class="text-3xl">Fast Bites, Faster Orders.</h1>
+        </div>
+      </div>
+      <div>
+        <img
+          class="w-full object-cover"
+          src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Zm9vZHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
+          alt="Delicious Food"
+        />
+      </div>
+    </div>
+    <div class="flex justify-between items-center text-white px-4 py-2">
+      <div>
+        <span>Up to 3 times per day</span>
+      </div>
+      <div class="flex items-center justify-center">
+        <button class="bg-white text-black p-2 rounded-full">Order Now</button>
+      </div>
+    </div>
+  </div>
+  <!-- section categories -->
+  <div>
+    <div class="flex justify-between items-center">
+      <div>
+        <h2 class="font-semibold text-lg">Categories</h2>
+      </div>
+      <div>
+        <a href="" class="text-red-500 font-medium">See more</a>
+      </div>
+    </div>
+    <div class="grid grid-cols-4 gap-4 mt-4">
+      <app-categories-items title="Burger"></app-categories-items>
+      <app-categories-items title="Pizza"></app-categories-items>
+      <app-categories-items title="Sushi"></app-categories-items>
+      <app-categories-items title="Salad"></app-categories-items>
+    </div>
+  </div>
+</div>

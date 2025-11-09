@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
-import { NgIconsModule } from '@ng-icons/core';
+import { LucideAngularModule, MapPin,BellDot   } from 'lucide-angular';
 
 @Component({
   selector: 'app-nav',
-  imports: [NgIconsModule],
+  imports: [LucideAngularModule],
   templateUrl: './nav.html',
   styleUrl: './nav.css',
 })
-export class Nav {}
+export class Nav {
+  readonly MapPin = MapPin;
+  readonly BellDot = BellDot;
+}
