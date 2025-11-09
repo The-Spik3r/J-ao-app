@@ -1,0 +1,75 @@
+<div class="fixed -bottom-1 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50 rounded-t-xl">
+  <div class="flex justify-around items-center py-2 px-4 max-w-md mx-auto">
+    <button
+      class="flex flex-col items-center py-2 px-3 min-w-0 transition-colors duration-200"
+      [class.text-red-500]="activeTab === 'home'"
+      [class.text-gray-400]="activeTab !== 'home'"
+      (click)="setActiveTab('home')"
+    >
+      <div class="relative">
+        <lucide-icon
+          [img]="Home"
+          class="w-6 h-6 mb-1"
+          [class.text-red-500]="activeTab === 'home'"
+          [class.text-gray-400]="activeTab !== 'home'"
+        >
+        </lucide-icon>
+      </div>
+      <span class="text-xs font-medium">Home</span>
+    </button>
+
+    <button
+      class="flex flex-col items-center py-2 px-3 min-w-0 transition-colors duration-200"
+      [class.text-red-500]="activeTab === 'search'"
+      [class.text-gray-400]="activeTab !== 'search'"
+      (click)="setActiveTab('search')"
+    >
+      <div class="relative">
+        <lucide-icon
+          [img]="Search"
+          class="w-6 h-6 mb-1"
+          [class.text-red-500]="activeTab === 'search'"
+          [class.text-gray-400]="activeTab !== 'search'"
+        >
+        </lucide-icon>
+      </div>
+      <span class="text-xs font-medium">Search</span>
+    </button>
+
+    <button
+      class="flex flex-col items-center py-2 px-3 min-w-0 transition-colors duration-200 relative"
+      [class.text-red-500]="activeTab === 'cart'"
+      [class.text-gray-400]="activeTab !== 'cart'"
+      (click)="setActiveTab('cart')"
+    >
+      <div class="relative">
+        <lucide-icon
+          [img]="ShoppingCart"
+          class="w-6 h-6 mb-1"
+          [class.text-red-500]="activeTab === 'cart'"
+          [class.text-gray-400]="activeTab !== 'cart'"
+        >
+        </lucide-icon>
+      </div>
+      <span class="text-xs font-medium">Cart</span>
+    </button>
+
+    <button
+      class="flex flex-col items-center py-2 px-3 min-w-0 transition-colors duration-200"
+      [class.text-red-500]="activeTab === 'profile'"
+      [class.text-gray-400]="activeTab !== 'profile'"
+      (click)="setActiveTab('profile')"
+    >
+      <div class="relative">
+        <lucide-icon
+          [img]="User"
+          class="w-6 h-6 mb-1"
+          [class.text-red-500]="activeTab === 'profile'"
+          [class.text-gray-400]="activeTab !== 'profile'"
+        >
+        </lucide-icon>
+      </div>
+      <span class="text-xs font-medium">Profile</span>
+    </button>
+  </div>
+</div>
