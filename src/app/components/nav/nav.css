@@ -1,0 +1,23 @@
+nav {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+nav a {
+  transition: all 0.2s ease-in-out;
+}
+
+nav a:hover {
+  transform: translateY(-1px);
+}
+
+nav button {
+  transition: all 0.2s ease-in-out;
+}
+
+nav button:hover {
+  transform: translateY(-1px);
+}
+
+ng-icon {
+  transition: color 0.2s ease-in-out;
+}
