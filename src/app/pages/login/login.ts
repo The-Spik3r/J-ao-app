@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { LucideAngularModule, Eye, EyeOff, Utensils } from 'lucide-angular';
 import { FormsModule } from '@angular/forms';
+import { Auth } from '../../services/auth';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,7 @@ export class Login {
   readonly Eye = Eye;
   readonly EyeOff = EyeOff;
   readonly Utensils = Utensils;
+  authService = inject(Auth)
 
   email: string = '';
   password: string = '';
@@ -22,8 +24,9 @@ export class Login {
     this.showPassword = !this.showPassword;
   }
 
-  onSubmit() {
+  async onSubmit() {
     console.log('Login attempt:', { email: this.email, password: this.password });
+    await this.authService.logIn(this.email, this.password);
   }
 
 }
