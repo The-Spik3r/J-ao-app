@@ -31,11 +31,27 @@ interface marketStallResponse {
   sellerId: number;
 }
 
+interface AuthMeResponse{
+  id: number,
+  firstName: string,
+  lastName: string,
+  email: string,
+  state: number,
+  marketStall: {
+    id: number,
+    name: string,
+    description: string,
+    location: string,
+    sellerId: number
+  }
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class Auth {
   token: string | null = localStorage.getItem('token');
+  sellerData: AuthMeResponse | null = null;
   private baseUrl: string = 'https://localhost:7200/api/';
 
   async logIn(email: string, password: string) {
@@ -60,6 +76,27 @@ export class Auth {
         success: false,
         message: error,
       };
+    }
+  }
+
+  async me(){
+    try {
+      const res = await fetch(this.baseUrl + 'Seller/me', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${this.token}`
+        },
+      });
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      const data = await res.json() as AuthMeResponse;
+      this.sellerData = data;
+      return data;
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      throw error;
     }
   }
 

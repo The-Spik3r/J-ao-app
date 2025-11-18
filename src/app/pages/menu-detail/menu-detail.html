@@ -1,0 +1,149 @@
+@if (loading()) {
+<div class="min-h-screen flex items-center justify-center bg-gray-50">
+  <div class="text-center">
+    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-red-500 mx-auto mb-4"></div>
+    <p class="text-gray-600">Loading menu...</p>
+  </div>
+</div>
+} @else if (error()) {
+<div class="min-h-screen flex items-center justify-center bg-gray-50">
+  <div class="text-center">
+    <p class="text-red-600 mb-4">{{ error() }}</p>
+    <button
+      (click)="goBack()"
+      class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors"
+    >
+      Back to home
+    </button>
+  </div>
+</div>
+} @else if (menu()) {
+<div class="min-h-screen bg-gray-50">
+  <!-- Header -->
+  <div class="bg-white shadow-sm sticky top-0 z-10">
+    <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+      <button
+        (click)="goBack()"
+        class="flex items-center text-gray-600 hover:text-gray-800 transition-colors"
+      >
+        <lucide-icon [img]="ArrowLeft" class="w-5 h-5 mr-2"></lucide-icon>
+        Back
+      </button>
+      <button
+        (click)="toggleFavorite()"
+        class="p-2 rounded-full hover:bg-gray-100 transition-colors"
+      >
+        <lucide-icon [img]="Heart" class="w-6 h-6 text-gray-600"></lucide-icon>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="max-w-4xl mx-auto px-4 py-6">
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+      <!-- Image Section -->
+      <div class="relative h-80 md:h-96">
+        <img [src]="menu()!.imageUrl" [alt]="menu()!.name" class="w-full h-full object-cover" />
+        @if (menu()!.isFeatured) {
+        <div class="absolute top-4 left-4">
+          <span class="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+            Featured
+          </span>
+        </div>
+        }
+      </div>
+
+      <!-- Content Section -->
+      <div class="p-6">
+        <!-- Title and Rating -->
+        <div class="flex items-start justify-between mb-4">
+          <div class="flex-1">
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+              {{ menu()!.name }}
+            </h1>
+            <div class="flex items-center mb-3">
+              <div class="flex items-center">
+                <lucide-icon
+                  [img]="Star"
+                  class="w-5 h-5 text-yellow-400 fill-current"
+                ></lucide-icon>
+                <lucide-icon
+                  [img]="Star"
+                  class="w-5 h-5 text-yellow-400 fill-current"
+                ></lucide-icon>
+                <lucide-icon
+                  [img]="Star"
+                  class="w-5 h-5 text-yellow-400 fill-current"
+                ></lucide-icon>
+                <lucide-icon
+                  [img]="Star"
+                  class="w-5 h-5 text-yellow-400 fill-current"
+                ></lucide-icon>
+                <lucide-icon [img]="Star" class="w-5 h-5 text-gray-300"></lucide-icon>
+              </div>
+              <span class="text-gray-600 ml-2 text-sm">(4.2)</span>
+            </div>
+          </div>
+          <div class="text-right">
+            <div class="text-3xl font-bold text-red-600">${{ menu()!.price }}</div>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="mb-6">
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Description</h3>
+          <p class="text-gray-600 leading-relaxed">{{ menu()!.description }}</p>
+        </div>
+
+        <!-- Stock Info -->
+        <div class="mb-6">
+          <div class="flex items-center justify-between">
+            <span class="text-gray-700 font-medium">Available stock:</span>
+            <span class="text-gray-900 font-semibold">{{ menu()!.stock }} units</span>
+          </div>
+        </div>
+
+        <!-- Quantity Selector -->
+        <div class="mb-6">
+          <label class="block text-gray-700 font-medium mb-3">Quantity</label>
+          <div class="flex items-center space-x-4">
+            <button
+              (click)="decreaseQuantity()"
+              [disabled]="quantity() <= 1"
+              class="w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-red-500 hover:text-red-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-black"
+            >
+              −
+            </button>
+            <span class="text-xl font-semibold min-w-12 text-center text-black">{{ quantity() }}</span>
+            <button
+              (click)="increaseQuantity()"
+              [disabled]="quantity() >= menu()!.stock"
+              class="w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-red-500 hover:text-red-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-black"
+            >
+              +
+            </button>
+          </div>
+        </div>
+
+        <!-- Total Price -->
+        <div class="mb-6 p-4 bg-gray-50 rounded-lg">
+          <div class="flex items-center justify-between">
+            <span class="text-lg font-medium text-gray-700">Total:</span>
+            <span class="text-2xl font-bold text-red-600">${{ menu()!.price * quantity() }}</span>
+          </div>
+        </div>
+
+        <!-- Add to Cart Button -->
+        <button
+          (click)="addToCart()"
+          [disabled]="menu()!.stock === 0"
+          class="w-full bg-red-500 hover:bg-red-600 disabled:bg-gray-400 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 disabled:transform-none disabled:cursor-not-allowed"
+        >
+          <lucide-icon [img]="ShoppingCart" class="w-5 h-5"></lucide-icon>
+          <span> @if (menu()!.stock === 0) { Out of stock } @else { Add to cart } </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+}

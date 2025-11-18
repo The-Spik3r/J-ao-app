@@ -5,17 +5,17 @@
     </div>
     <div>
       <div>
-        <span class="text-gray-500 text-sm">Hello Jonny</span>
+        <span class="text-gray-700 text-sm">Hello {{this.authService.sellerData?.firstName}}</span>
       </div>
       <div class="flex items-center gap-1">
-        <lucide-icon [img]="MapPin" class="w-4 h-4"></lucide-icon>
-        <span class="text-lg font-semibold">Argentina</span>
+        <lucide-icon [img]="MapPin" class="w-4 h-4 text-gray-600"></lucide-icon>
+        <span class="text-lg font-semibold text-gray-600">Argentina</span>
       </div>
     </div>
   </div>
   <div>
     <button class=" rounded-full bg-white p-3">
-      <lucide-icon [img]="BellDot" class="w-6 h-6"></lucide-icon>
+      <lucide-icon [img]="BellDot" class="w-6 h-6 text-gray-500"></lucide-icon>
     </button>
   </div>
 </nav>

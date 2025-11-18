@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { LucideAngularModule, MapPin,BellDot   } from 'lucide-angular';
+import { Auth } from '../../services/auth';
 
 @Component({
   selector: 'app-nav',
@@ -7,7 +8,12 @@ import { LucideAngularModule, MapPin,BellDot   } from 'lucide-angular';
   templateUrl: './nav.html',
   styleUrl: './nav.css',
 })
-export class Nav {
+export class Nav implements OnInit {
   readonly MapPin = MapPin;
   readonly BellDot = BellDot;
+  authService = inject(Auth);
+
+  ngOnInit() {
+    this.authService.me();
+  }
 }

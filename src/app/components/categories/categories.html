@@ -27,17 +27,20 @@
   <div>
     <div class="flex justify-between items-center">
       <div>
-        <h2 class="font-semibold text-lg">Categories</h2>
+        <h2 class="font-semibold text-lg text-gray-700">Categories</h2>
       </div>
       <div>
-        <a href="" class="text-red-500 font-medium">See more</a>
+        <a
+          routerLink="/categories"
+          class="text-red-500 font-medium hover:text-red-600 transition-colors cursor-pointer"
+          >See more</a
+        >
       </div>
     </div>
     <div class="grid grid-cols-4 gap-4 mt-4">
-      <app-categories-items title="Burger"></app-categories-items>
-      <app-categories-items title="Pizza"></app-categories-items>
-      <app-categories-items title="Sushi"></app-categories-items>
-      <app-categories-items title="Salad"></app-categories-items>
+      @for (category of this.categoriesService.categories; track $index) {
+      <app-categories-items [title]="category.name"></app-categories-items>
+      }
     </div>
   </div>
 </div>

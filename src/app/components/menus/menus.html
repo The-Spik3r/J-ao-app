@@ -1,26 +1,26 @@
 <div class="p-4 flex flex-col gap-3">
   <div class="flex justify-between items-center">
     <div>
-      <h2 class="font-semibold text-lg">Menus</h2>
+      <h2 class="font-semibold text-lg text-gray-700">Menus</h2>
     </div>
     <div>
-      <a href="" class="text-red-500 font-medium">See more</a>
+      <a
+        routerLink="/menus"
+        class="text-red-500 font-medium hover:text-red-600 transition-colors cursor-pointer"
+        >See more</a
+      >
     </div>
   </div>
-  <div class="flex gap-2">
+  <div class="flex flex-1 gap-2 overflow-x-auto">
+    @for (menu of MenuService.menusItems; track menu) {
     <app-menu-items
-      [imagen]="'https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=300&h=200&fit=crop'"
-      [nombre]="'Hamburguesa Clásica'"
-      [subtitulo]="'Carne, lechuga, tomate y queso'"
-      [precio]="12.99"
+      [id]="menu.id"
+      [imagen]="menu.imageUrl"
+      [nombre]="menu.name"
+      [subtitulo]="menu.description"
+      [precio]="menu.price"
     >
     </app-menu-items>
-    <app-menu-items
-      [imagen]="'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=300&h=200&fit=crop'"
-      [nombre]="'Pizza Margherita'"
-      [subtitulo]="'Tomate, mozzarella y albahaca'"
-      [precio]="15.5"
-    >
-    </app-menu-items>
+    }
   </div>
 </div>

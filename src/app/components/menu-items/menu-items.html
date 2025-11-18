@@ -1,15 +1,19 @@
 <div
-  class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+  class="bg-white rounded-lg shadow-md w-full overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 h-full cursor-pointer"
+  (click)="verDetalle()"
 >
   <div class="relative">
-    <img [src]="imagen()" [alt]="nombre()" class="w-full h-30 object-cover" />
+    <img [src]="imagen()" [alt]="nombre()" class="w-full min-h-30 object-cover" />
     <div class="absolute top-2 right-2">
-      <button class="bg-white rounded-full p-1.5 shadow-md hover:shadow-lg transition-shadow">
-        <lucide-icon [img]="ShoppingCart" class="w-3 h-3"> </lucide-icon>
+      <button
+        class="bg-white rounded-full p-1.5 shadow-md hover:shadow-lg transition-shadow"
+        (click)="agregarAlCarrito(); $event.stopPropagation()"
+      >
+        <lucide-icon [img]="ShoppingCart" class="w-3 h-3 text-gray-700"> </lucide-icon>
       </button>
     </div>
   </div>
-  <div class="p-3">
+  <div class="p-3 flex-1">
     <div class="flex items-start justify-between mb-1">
       <h3 class="text-lg font-bold text-gray-900 line-clamp-1">{{ nombre() }}</h3>
       <div class="flex items-center ml-1">
@@ -26,7 +30,7 @@
       </div>
       <button
         class="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 shadow-sm hover:shadow-md transform hover:scale-105"
-        (click)="agregarAlCarrito()"
+        (click)="agregarAlCarrito(); $event.stopPropagation()"
       >
         <lucide-icon [img]="ArrowRight" class="w-3 h-3 inline-block mr-1"> </lucide-icon>
       </button>
