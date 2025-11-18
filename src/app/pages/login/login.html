@@ -1,10 +1,9 @@
+<p-toast position="top-center"></p-toast>
 <div class="min-h-screen bg-linear-to-b from-red-500 to-red-600 flex flex-col">
   <div class="flex-1 flex flex-col items-center justify-center px-6 pt-16 pb-8">
     <div class="flex items-center mb-12">
       <lucide-icon [img]="Utensils" class="w-8 h-8 text-white mr-2"></lucide-icon>
-      <h1 class="text-4xl font-bold text-white">
-        Jīao
-      </h1>
+      <h1 class="text-4xl font-bold text-white">Jīao</h1>
     </div>
   </div>
 
@@ -42,7 +41,11 @@
           </button>
         </div>
       </div>
-
+      <div>
+        <span class="text-red-500">{{
+          failedLogin ? 'Login failed. Please check your credentials and try again.' : ''
+        }}</span>
+      </div>
       <button
         type="submit"
         class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-4 rounded-2xl transition-colors duration-200 shadow-lg hover:shadow-xl"
