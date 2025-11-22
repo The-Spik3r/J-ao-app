@@ -2,7 +2,7 @@
 <div class="min-h-screen flex items-center justify-center bg-gray-50">
   <div class="text-center">
     <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-red-500 mx-auto mb-4"></div>
-    <p class="text-gray-600">Loading categories...</p>
+    <p class="text-gray-600">Loading market stalls...</p>
   </div>
 </div>
 } @else if (error()) {
@@ -29,7 +29,7 @@
           <lucide-icon [img]="ArrowLeft" class="w-5 h-5 mr-2"></lucide-icon>
           Back
         </button>
-        <h1 class="text-2xl font-bold text-gray-900">All Categories</h1>
+        <h1 class="text-2xl font-bold text-gray-900">All Market Stalls</h1>
         <button
           (click)="toggleViewMode()"
           class="p-2 rounded-lg hover:bg-gray-100 transition-colors"
@@ -47,7 +47,7 @@
         </div>
         <input
           type="text"
-          placeholder="Search categories..."
+          placeholder="Search market stalls..."
           [value]="searchTerm()"
           (input)="onSearchChange($event)"
           class="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-full leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-red-500 focus:border-red-500"
@@ -77,86 +77,62 @@
   </div>
 
   <div class="max-w-7xl mx-auto px-4 py-6">
-    @if (filteredCategories().length === 0 && !loading()) {
+    @if (filteredMarketStalls().length === 0) {
     <div class="text-center py-12">
-      <p class="text-gray-500 text-lg">No categories found</p>
+      <p class="text-gray-500 text-lg">No market stalls found</p>
       @if (searchTerm()) {
-      <button
-        (click)="clearSearch()"
-        class="mt-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors"
-      >
-        Clear search
-      </button>
+      <p class="text-gray-400 text-sm mt-2">Try adjusting your search</p>
       }
     </div>
     } @else {
     <div class="mb-6">
       <p class="text-gray-600">
-        Showing {{ filteredCategories().length }} of {{ categories().length }} categories
+        Showing {{ filteredMarketStalls().length }} of {{ marketStalls().length }} market stalls
       </p>
     </div>
 
     @if (viewMode() === 'grid') {
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
-      @for (category of filteredCategories(); track category.id) {
+      @for (stall of filteredMarketStalls(); track stall.id) {
       <div
-        (click)="navigateToCategory(category.id)"
         class="bg-white p-6 rounded-2xl flex flex-col items-center gap-3 shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer hover:-translate-y-1"
       >
         <div class="relative">
-          @if (category.fotoUrl) {
-          <img
-            [src]="category.fotoUrl"
-            [alt]="category.name"
-            class="h-12 w-12 rounded-full object-cover"
-          />
-          } @else {
-          <div
-            class="h-12 w-12 bg-gradient-to-br from-red-400 to-red-600 rounded-full flex items-center justify-center"
-          >
+          <div class="h-12 w-12 bg-red-500 rounded-full flex items-center justify-center">
             <span class="text-white font-bold text-lg">{{
-              category.name.charAt(0).toUpperCase()
+              stall.name.charAt(0).toUpperCase()
             }}</span>
           </div>
-          }
         </div>
         <div class="text-center">
-          <p class="text-gray-700 font-medium text-sm">{{ category.name }}</p>
+          <p class="text-gray-700 font-medium text-sm truncate max-w-full">{{ stall.name }}</p>
+          <p class="text-gray-500 text-xs truncate max-w-full">{{ stall.location }}</p>
         </div>
       </div>
       }
     </div>
-    }
-
-    @if (viewMode() === 'list') {
+    } @if (viewMode() === 'list') {
     <div class="space-y-4">
-      @for (category of filteredCategories(); track category.id) {
+      @for (stall of filteredMarketStalls(); track stall.id) {
       <div
-        (click)="navigateToCategory(category.id)"
         class="bg-white p-4 rounded-xl flex items-center gap-4 shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer hover:-translate-y-0.5"
       >
-        <div class="flex-shrink-0">
-          @if (category.fotoUrl) {
-          <img
-            [src]="category.fotoUrl"
-            [alt]="category.name"
-            class="h-16 w-16 rounded-full object-cover"
-          />
-          } @else {
-          <div
-            class="h-16 w-16 bg-gradient-to-br from-red-400 to-red-600 rounded-full flex items-center justify-center"
-          >
+        <div class="shrink-0">
+          <div class="h-16 w-16 bg-red-500 rounded-full flex items-center justify-center">
             <span class="text-white font-bold text-xl">{{
-              category.name.charAt(0).toUpperCase()
+              stall.name.charAt(0).toUpperCase()
             }}</span>
           </div>
-          }
         </div>
         <div class="flex-1 min-w-0">
-          <h3 class="text-lg font-semibold text-gray-900 truncate">{{ category.name }}</h3>
-          <p class="text-gray-600 text-sm mt-1">{{ category.description }}</p>
+          <h3 class="text-lg font-semibold text-gray-900 truncate">{{ stall.name }}</h3>
+          <p class="text-gray-600 text-sm mt-1">{{ stall.description }}</p>
+          <div class="flex items-center gap-3 mt-2">
+            <span class="text-gray-500 text-xs">📍 {{ stall.location }}</span>
+            <span class="text-gray-400 text-xs">• {{ stall.views }} views</span>
+          </div>
         </div>
-        <div class="flex-shrink-0">
+        <div class="shrink-0">
           <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               stroke-linecap="round"
@@ -169,12 +145,11 @@
       </div>
       }
     </div>
-    }
+    } }
 
     <div class="text-center mt-12 py-8">
-      <p class="text-gray-500">{{ filteredCategories().length }} categories loaded</p>
+      <p class="text-gray-500">{{ filteredMarketStalls().length }} market stalls loaded</p>
     </div>
-    }
   </div>
 </div>
 }

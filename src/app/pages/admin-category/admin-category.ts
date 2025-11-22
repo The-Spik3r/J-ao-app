@@ -1,0 +1,15 @@
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { LucideAngularModule, Plus, Edit, Trash2 } from 'lucide-angular';
+
+@Component({
+  selector: 'app-admin-category',
+  imports: [CommonModule, LucideAngularModule],
+  templateUrl: './admin-category.html',
+  styleUrl: './admin-category.css',
+})
+export class AdminCategory {
+  readonly Plus = Plus;
+  readonly Edit = Edit;
+  readonly Trash2 = Trash2;
+}

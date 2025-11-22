@@ -19,7 +19,6 @@
 </div>
 } @else if (menu()) {
 <div class="min-h-screen bg-gray-50">
-  <!-- Header -->
   <div class="bg-white shadow-sm sticky top-0 z-10">
     <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
       <button
@@ -38,10 +37,8 @@
     </div>
   </div>
 
-  <!-- Main Content -->
   <div class="max-w-4xl mx-auto px-4 py-6">
     <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-      <!-- Image Section -->
       <div class="relative h-80 md:h-96">
         <img [src]="menu()!.imageUrl" [alt]="menu()!.name" class="w-full h-full object-cover" />
         @if (menu()!.isFeatured) {
@@ -53,9 +50,7 @@
         }
       </div>
 
-      <!-- Content Section -->
       <div class="p-6">
-        <!-- Title and Rating -->
         <div class="flex items-start justify-between mb-4">
           <div class="flex-1">
             <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
@@ -89,13 +84,11 @@
           </div>
         </div>
 
-        <!-- Description -->
         <div class="mb-6">
           <h3 class="text-lg font-semibold text-gray-900 mb-2">Description</h3>
           <p class="text-gray-600 leading-relaxed">{{ menu()!.description }}</p>
         </div>
 
-        <!-- Stock Info -->
         <div class="mb-6">
           <div class="flex items-center justify-between">
             <span class="text-gray-700 font-medium">Available stock:</span>
@@ -103,7 +96,6 @@
           </div>
         </div>
 
-        <!-- Quantity Selector -->
         <div class="mb-6">
           <label class="block text-gray-700 font-medium mb-3">Quantity</label>
           <div class="flex items-center space-x-4">
@@ -125,7 +117,6 @@
           </div>
         </div>
 
-        <!-- Total Price -->
         <div class="mb-6 p-4 bg-gray-50 rounded-lg">
           <div class="flex items-center justify-between">
             <span class="text-lg font-medium text-gray-700">Total:</span>
@@ -133,7 +124,6 @@
           </div>
         </div>
 
-        <!-- Add to Cart Button -->
         <button
           (click)="addToCart()"
           [disabled]="menu()!.stock === 0"

@@ -1,0 +1,43 @@
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-8 text-center">Seller Management</h1>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <a
+      routerLink="/admin/marketStall"
+      class="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer overflow-hidden"
+    >
+      <div class="bg-red-500 p-6 text-white">
+        <div class="flex items-center justify-center mb-4">
+          <lucide-icon [img]="Store" class="w-16 h-16"></lucide-icon>
+        </div>
+        <h2 class="text-2xl font-bold text-center">MarketStall</h2>
+        <p class="text-white text-center mb-4">Manage your market stalls</p>
+      </div>
+    </a>
+
+    <a
+      routerLink="/admin/category"
+      class="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer overflow-hidden"
+    >
+      <div class="bg-red-400 p-6 text-white">
+        <div class="flex items-center justify-center mb-4">
+          <lucide-icon [img]="Grid" class="w-16 h-16"></lucide-icon>
+        </div>
+        <h2 class="text-2xl font-bold text-center">Category</h2>
+        <p class="text-white text-center mb-4">Organize your product categories</p>
+      </div>
+    </a>
+
+    <a
+      routerLink="/admin/menu"
+      class="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer overflow-hidden"
+    >
+      <div class="bg-red-600 p-6 text-white">
+        <div class="flex items-center justify-center mb-4">
+          <lucide-icon [img]="Menu" class="w-16 h-16"></lucide-icon>
+        </div>
+        <h2 class="text-2xl font-bold text-center">Menu</h2>
+        <p class="text-white text-center mb-4">Manage your product menu</p>
+      </div>
+    </a>
+  </div>
+</div>

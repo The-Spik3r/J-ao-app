@@ -5,7 +5,7 @@
     </div>
     <div>
       <div>
-        <span class="text-gray-700 text-sm">Hello {{this.authService.sellerData?.firstName}}</span>
+        <span class="text-gray-700 text-sm">Hello {{this.authService.sellerData?.firstName ? this.authService.sellerData?.firstName : 'Guest'}}</span>
       </div>
       <div class="flex items-center gap-1">
         <lucide-icon [img]="MapPin" class="w-4 h-4 text-gray-600"></lucide-icon>

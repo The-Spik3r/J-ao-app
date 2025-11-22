@@ -30,7 +30,6 @@ export class Login {
   }
 
   async onSubmit() {
-    console.log('Login attempt:', { email: this.email, password: this.password });
     const res = await this.authService.logIn(this.email, this.password);
     this.messageService.add({
       severity: res?.success ? 'success' : 'contrast',
@@ -41,7 +40,9 @@ export class Login {
     });
     setTimeout(() => {
       this.messageService.clear();
-      this.router.navigate(['/']);
+      if (res.success) {
+        this.router.navigate(['/']);
+      }
     }, 2000);
     if (!res?.success) {
       this.failedLogin = true;

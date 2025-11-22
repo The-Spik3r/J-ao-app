@@ -1,0 +1,44 @@
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-8 text-center">Category Management</h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <a
+      href="#"
+      class="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer overflow-hidden"
+    >
+      <div class="bg-red-500 p-6 text-white">
+        <div class="flex items-center justify-center mb-4">
+          <lucide-icon [img]="Plus" class="w-16 h-16"></lucide-icon>
+        </div>
+        <h2 class="text-2xl font-bold text-center">Create</h2>
+        <p class="text-white text-center mb-4">Create new category</p>
+      </div>
+    </a>
+
+    <a
+      href="#"
+      class="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer overflow-hidden"
+    >
+      <div class="bg-red-400 p-6 text-white">
+        <div class="flex items-center justify-center mb-4">
+          <lucide-icon [img]="Edit" class="w-16 h-16"></lucide-icon>
+        </div>
+        <h2 class="text-2xl font-bold text-center">Edit</h2>
+        <p class="text-white text-center mb-4">Edit existing category</p>
+      </div>
+    </a>
+
+    <a
+      href="#"
+      class="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer overflow-hidden"
+    >
+      <div class="bg-red-600 p-6 text-white">
+        <div class="flex items-center justify-center mb-4">
+          <lucide-icon [img]="Trash2" class="w-16 h-16"></lucide-icon>
+        </div>
+        <h2 class="text-2xl font-bold text-center">Delete</h2>
+        <p class="text-white text-center mb-4">Delete category</p>
+      </div>
+    </a>
+  </div>
+</div>

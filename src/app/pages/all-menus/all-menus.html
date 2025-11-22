@@ -19,7 +19,6 @@
 </div>
 } @else {
 <div class="min-h-screen bg-gray-50">
-  <!-- Header -->
   <div class="bg-white shadow-sm sticky top-0 z-10">
     <div class="max-w-7xl mx-auto px-4 py-4">
       <div class="flex items-center justify-between mb-4">
@@ -32,10 +31,8 @@
         </button>
         <h1 class="text-2xl font-bold text-gray-900">All Menus</h1>
         <div class="w-16"></div>
-        <!-- Spacer for alignment -->
       </div>
 
-      <!-- Search Bar -->
       <div class="relative mb-4">
         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
           <lucide-icon [img]="Search" class="w-5 h-5 text-gray-400"></lucide-icon>
@@ -54,7 +51,6 @@
         }
       </div>
 
-      <!-- Filter Buttons -->
       <div class="flex flex-wrap gap-2 mb-4">
         <button
           (click)="showAll()"
@@ -84,7 +80,6 @@
     </div>
   </div>
 
-  <!-- Main Content -->
   <div class="max-w-7xl mx-auto px-4 py-6">
     @if (filteredMenus().length === 0 && !loading()) {
     <div class="text-center py-12">
@@ -99,14 +94,12 @@
       }
     </div>
     } @else {
-    <!-- Results count -->
     <div class="mb-6">
       <p class="text-gray-600">
         Showing {{ filteredMenus().length }} of {{ menus().length }} menus
       </p>
     </div>
 
-    <!-- Menu Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       @for (menu of filteredMenus(); track menu.id) {
       <app-menu-items
@@ -120,7 +113,6 @@
       }
     </div>
 
-    <!-- Load more section (for future infinite scroll) -->
     <div class="text-center mt-12 py-8">
       <p class="text-gray-500">{{ filteredMenus().length }} menus loaded</p>
     </div>

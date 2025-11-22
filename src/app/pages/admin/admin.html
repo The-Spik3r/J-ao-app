@@ -1,0 +1,15 @@
+<div class="bg-gray-200 min-h-screen text-black">
+  <nav class="flex items-center justify-between px-4 py-2 bg-white shadow-md">
+    <div
+      (click)="goBack()"
+      class="bg-gray-200 p-1 rounded-full cursor-pointer hover:bg-gray-300 transition"
+    >
+      <lucide-icon [img]="ArrowLeft" class="w-8 h-8"></lucide-icon>
+    </div>
+    <div>
+      <span class="text-xl font-semibold">Mode SELLER</span>
+    </div>
+  </nav>
+
+  <router-outlet></router-outlet>
+</div>

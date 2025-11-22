@@ -1,0 +1,24 @@
+<div class="w-full p-2 flex flex-col gap-4">
+  <div>
+    <div class="flex justify-between items-center">
+      <div>
+        <h2 class="font-semibold text-lg text-gray-700">Market Stalls</h2>
+      </div>
+      <div>
+        <a
+          routerLink="/market-stalls"
+          class="text-red-500 font-medium hover:text-red-600 transition-colors cursor-pointer"
+          >See more</a
+        >
+      </div>
+    </div>
+    <div class="grid grid-cols-4 gap-4 mt-4">
+      @for (stall of this.marketStallsService.marketStalls; track stall.id) {
+      <app-market-stalls-items
+        [title]="stall.name"
+        [location]="stall.location"
+      ></app-market-stalls-items>
+      }
+    </div>
+  </div>
+</div>
