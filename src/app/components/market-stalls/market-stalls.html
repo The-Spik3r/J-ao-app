@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="grid grid-cols-4 gap-4 mt-4">
-      @for (stall of this.marketStallsService.marketStalls; track stall.id) {
+      @for (stall of marketStalls(); track stall.id) {
       <app-market-stalls-items
         [title]="stall.name"
         [location]="stall.location"

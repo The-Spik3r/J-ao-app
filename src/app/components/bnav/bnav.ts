@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { LucideAngularModule, Home, Search, ShoppingCart, User } from 'lucide-angular';
+import { CartService } from '../../services/cart';
 
 @Component({
   selector: 'app-bnav',
@@ -15,7 +17,37 @@ export class BNav {
 
   activeTab = 'home';
 
+  constructor(
+    private cartService: CartService,
+    private router: Router
+  ) {}
+
+  // Exponer las propiedades del carrito para usar en el template
+  get totalItems() {
+    return this.cartService.totalItems();
+  }
+
+  get hasItems() {
+    return this.totalItems > 0;
+  }
+
   setActiveTab(tab: string) {
     this.activeTab = tab;
+    
+    // Navegar a las páginas correspondientes
+    switch (tab) {
+      case 'home':
+        this.router.navigate(['/']);
+        break;
+      case 'search':
+        this.router.navigate(['/search']);
+        break;
+      case 'cart':
+        this.router.navigate(['/cart']);
+        break;
+      case 'profile':
+        this.router.navigate(['/profile']);
+        break;
+    }
   }
 }

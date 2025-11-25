@@ -2,7 +2,7 @@ import { Component, OnInit, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { LucideAngularModule, ArrowLeft, Search, Grid, List } from 'lucide-angular';
-import { MarketStalls as MarketStallsService } from '../../services/market-stalls';
+import { MarketStallsService } from '../../services/market-stalls';
 import { MarketStallsItems } from '../../components/market-stalls-items/market-stalls-items';
 
 interface MarketStallResponse {
@@ -50,16 +50,16 @@ export class AllMarketStalls implements OnInit {
   filteredMarketStalls = signal<MarketStallResponse[]>([]);
   viewMode = signal<'grid' | 'list'>('grid');
 
-  async ngOnInit() {
-    await this.loadAllMarketStalls();
+  ngOnInit() {
+    this.loadAllMarketStalls();
   }
 
   private async loadAllMarketStalls() {
+    this.loading.set(true);
     try {
-      this.loading.set(true);
-      await this.marketStallsService.getAllMarketStalls();
-      this.marketStalls.set(this.marketStallsService.marketStalls);
-      this.filteredMarketStalls.set(this.marketStallsService.marketStalls);
+      const stalls = await this.marketStallsService.getAllMarketStalls();
+      this.marketStalls.set(stalls);
+      this.filteredMarketStalls.set(stalls);
     } catch (error) {
       this.error.set('Error loading market stalls');
       console.error('Error loading market stalls:', error);

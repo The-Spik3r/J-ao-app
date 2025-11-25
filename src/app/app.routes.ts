@@ -11,6 +11,17 @@ import { AdminHome } from './pages/admin-home/admin-home';
 import { AdminMarketStall } from './pages/admin-market-stall/admin-market-stall';
 import { AdminCategory } from './pages/admin-category/admin-category';
 import { AdminMenu } from './pages/admin-menu/admin-menu';
+import { AdminMarketStallCreateComponent } from './pages/admin/admin-market-stall-create/admin-market-stall-create';
+import { AdminMarketStallEditComponent } from './pages/admin/admin-market-stall-edit/admin-market-stall-edit';
+import { AdminMarketStallDeleteComponent } from './pages/admin/admin-market-stall-delete/admin-market-stall-delete';
+import { AdminCategoryCreateComponent } from './pages/admin/admin-category-create/admin-category-create';
+import { AdminCategoryEditComponent } from './pages/admin/admin-category-edit/admin-category-edit';
+import { AdminCategoryDeleteComponent } from './pages/admin/admin-category-delete/admin-category-delete';
+import { AdminMenuComponent } from './pages/admin/admin-menu/admin-menu';
+import { AdminMenuCreateComponent } from './pages/admin/admin-menu-create/admin-menu-create';
+import { AdminMenuEditComponent } from './pages/admin/admin-menu-edit/admin-menu-edit';
+import { AdminMenuDeleteComponent } from './pages/admin/admin-menu-delete/admin-menu-delete';
+import { Cart } from './pages/cart/cart';
 
 export const routes: Routes = [
   {
@@ -34,6 +45,10 @@ export const routes: Routes = [
     component: AllCategories,
   },
   {
+    path: 'cart',
+    component: Cart,
+  },
+  {
     path: 'market-stalls',
     component: AllMarketStalls,
   },
@@ -50,12 +65,48 @@ export const routes: Routes = [
         component: AdminMarketStall,
       },
       {
+        path: 'marketStall/create',
+        component: AdminMarketStallCreateComponent,
+      },
+      {
+        path: 'marketStall/edit',
+        component: AdminMarketStallEditComponent,
+      },
+      {
+        path: 'marketStall/delete',
+        component: AdminMarketStallDeleteComponent,
+      },
+      {
         path: 'category',
         component: AdminCategory,
       },
       {
+        path: 'category/create',
+        component: AdminCategoryCreateComponent,
+      },
+      {
+        path: 'category/edit',
+        component: AdminCategoryEditComponent,
+      },
+      {
+        path: 'category/delete',
+        component: AdminCategoryDeleteComponent,
+      },
+      {
         path: 'menu',
-        component: AdminMenu,
+        component: AdminMenuComponent,
+      },
+      {
+        path: 'menu/create',
+        component: AdminMenuCreateComponent,
+      },
+      {
+        path: 'menu/edit',
+        component: AdminMenuEditComponent,
+      },
+      {
+        path: 'menu/delete',
+        component: AdminMenuDeleteComponent,
       },
     ],
   },

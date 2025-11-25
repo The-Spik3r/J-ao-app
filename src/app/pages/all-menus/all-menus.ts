@@ -2,7 +2,7 @@ import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { LucideAngularModule, ArrowLeft, Search, Filter } from 'lucide-angular';
-import { Menus } from '../../services/menus';
+import { MenusService } from '../../services/menus';
 import { MenuItems } from '../../components/menu-items/menu-items';
 
 interface MenuResponse {
@@ -34,7 +34,7 @@ export class AllMenus implements OnInit {
   searchTerm = signal<string>('');
   filteredMenus = signal<MenuResponse[]>([]);
 
-  constructor(private router: Router, private menuService: Menus) {}
+  constructor(private router: Router, private menusService: MenusService) {}
 
   async ngOnInit() {
     await this.loadAllMenus();
@@ -43,9 +43,9 @@ export class AllMenus implements OnInit {
   private async loadAllMenus() {
     try {
       this.loading.set(true);
-      await this.menuService.getAllMenus();
-      this.menus.set(this.menuService.menusItems);
-      this.filteredMenus.set(this.menuService.menusItems);
+      const menus = await this.menusService.getAllMenus();
+      this.menus.set(menus);
+      this.filteredMenus.set(menus);
     } catch (error) {
       this.error.set('Error loading menus');
       console.error('Error loading menus:', error);

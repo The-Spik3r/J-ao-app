@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, signal } from '@angular/core';
 
 @Component({
   selector: 'app-categories-items',
@@ -8,4 +8,10 @@ import { Component, input } from '@angular/core';
 })
 export class CategoriesItems {
   title = input.required<string>();
+  imageUrl = input<string>();
+  imageError = signal(false);
+
+  handleImageError() {
+    this.imageError.set(true);
+  }
 }

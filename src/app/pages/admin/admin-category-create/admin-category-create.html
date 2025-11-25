@@ -1,0 +1,106 @@
+<div class="min-h-screen bg-gray-50 py-8">
+  <div class="max-w-2xl mx-auto px-4">
+    <div class="mb-6">
+      <button
+        (click)="goBack()"
+        class="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors duration-200"
+      >
+        <lucide-icon [img]="ArrowLeft" class="w-5 h-5"></lucide-icon>
+        Back to Category Management
+      </button>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-md p-6">
+      <h1 class="text-2xl font-bold text-gray-800 mb-6">Create New Category</h1>
+
+      @if (isLoading) {
+      <div class="flex justify-center py-8">
+        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-red-500"></div>
+      </div>
+      } @else { @if (errorMessage) {
+      <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md mb-4">
+        {{ errorMessage }}
+      </div>
+      }
+
+      <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+        <div class="space-y-4">
+          <div>
+            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">
+              Category Name *
+            </label>
+            <input
+              type="text"
+              id="name"
+              formControlName="name"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+              placeholder="Enter category name"
+            />
+            @if (categoryForm.get('name')?.invalid && categoryForm.get('name')?.touched) {
+            <p class="text-red-500 text-sm mt-1">
+              @if (categoryForm.get('name')?.errors?.['required']) { Name is required } @if
+              (categoryForm.get('name')?.errors?.['minlength']) { Name must be at least 2 characters
+              long }
+            </p>
+            }
+          </div>
+
+          <div>
+            <label for="description" class="block text-sm font-medium text-gray-700 mb-1">
+              Description *
+            </label>
+            <textarea
+              id="description"
+              formControlName="description"
+              rows="4"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+              placeholder="Enter category description"
+            ></textarea>
+            @if (categoryForm.get('description')?.invalid &&
+            categoryForm.get('description')?.touched) {
+            <p class="text-red-500 text-sm mt-1">
+              @if (categoryForm.get('description')?.errors?.['required']) { Description is required
+              } @if (categoryForm.get('description')?.errors?.['minlength']) { Description must be
+              at least 10 characters long }
+            </p>
+            }
+          </div>
+
+          <div>
+            <label for="fotoUrl" class="block text-sm font-medium text-gray-700 mb-1">
+              Photo URL *
+            </label>
+            <input
+              type="url"
+              id="fotoUrl"
+              formControlName="fotoUrl"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+              placeholder="Enter photo URL"
+            />
+            @if (categoryForm.get('fotoUrl')?.invalid && categoryForm.get('fotoUrl')?.touched) {
+            <p class="text-red-500 text-sm mt-1">Photo URL is required</p>
+            }
+          </div>
+        </div>
+
+        <div class="flex gap-4 mt-6">
+          <button
+            type="submit"
+            [disabled]="categoryForm.invalid || isSubmitting || !marketStallId"
+            class="bg-red-500 text-white px-6 py-2 rounded-md hover:bg-red-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200"
+          >
+            @if (isSubmitting) { Creating... } @else { Create Category }
+          </button>
+          <button
+            type="button"
+            (click)="goBack()"
+            class="bg-gray-500 text-white px-6 py-2 rounded-md hover:bg-gray-600 transition-colors duration-200"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+      }
+    </div>
+  </div>
+</div>

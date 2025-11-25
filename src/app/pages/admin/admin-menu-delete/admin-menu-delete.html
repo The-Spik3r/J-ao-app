@@ -1,0 +1,163 @@
+<div class="min-h-screen bg-gray-50 p-6">
+  <div class="max-w-4xl mx-auto">
+    <div class="mb-6">
+      <button (click)="goBack()" class="text-red-600 hover:text-red-800 mb-4 flex items-center">
+        <lucide-icon [img]="ArrowLeft" class="w-5 h-5 mr-2"></lucide-icon>
+        Back to Menu Management
+      </button>
+      <h1 class="text-3xl font-bold text-gray-900">Delete Menu Item</h1>
+      <p class="text-gray-600 mt-2">Select a menu item to remove from your catalog</p>
+    </div>
+
+    <div *ngIf="isLoading" class="bg-white rounded-lg shadow-md p-6">
+      <div class="animate-pulse">
+        <div class="h-4 bg-gray-200 rounded w-1/4 mb-4"></div>
+        <div class="space-y-3">
+          <div class="h-4 bg-gray-200 rounded"></div>
+          <div class="h-4 bg-gray-200 rounded w-5/6"></div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!isLoading" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <!-- Menu Selection Panel -->
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold text-gray-900 mb-4">Select Menu Item to Delete</h2>
+
+        <div *ngIf="menus.length === 0" class="text-center py-8">
+          <div class="text-gray-400 mb-4">
+            <lucide-icon [img]="Menu" class="w-16 h-16 mx-auto"></lucide-icon>
+          </div>
+          <p class="text-gray-500 mb-4">No menu items found to delete.</p>
+          <button (click)="goBack()" class="text-red-600 hover:text-red-800">
+            Return to Menu Management
+          </button>
+        </div>
+
+        <div *ngIf="menus.length > 0" class="space-y-3 max-h-96 overflow-y-auto">
+          <div
+            *ngFor="let menu of menus"
+            (click)="selectMenu(menu)"
+            class="p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors"
+            [class.border-red-500]="selectedMenu?.id === menu.id"
+            [class.bg-red-50]="selectedMenu?.id === menu.id"
+          >
+            <div class="flex items-start space-x-3">
+              <img
+                [src]="menu.imageUrl"
+                [alt]="menu.name"
+                class="w-12 h-12 rounded-lg object-cover"
+                (error)="$event.target.src = 'https://via.placeholder.com/48x48?text=No+Image'"
+              />
+              <div class="flex-1 min-w-0">
+                <h3 class="font-medium text-gray-900 truncate">{{ menu.name }}</h3>
+                <p class="text-sm text-gray-500 truncate">{{ menu.description }}</p>
+                <div class="flex items-center justify-between mt-1">
+                  <span class="text-lg font-bold text-red-600">${{ menu.price }}</span>
+                  <span class="text-sm text-gray-500">Stock: {{ menu.stock }}</span>
+                </div>
+                <p class="text-sm text-gray-400 mt-1">
+                  Category: {{ getCategoryName(menu.categoryId) }}
+                </p>
+                <div class="flex items-center mt-1">
+                  <span
+                    *ngIf="menu.isFeatured"
+                    class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800"
+                  >
+                    ★ Featured
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Confirmation Panel -->
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold text-gray-900 mb-4">Confirm Deletion</h2>
+
+        <div
+          *ngIf="errorMessage"
+          class="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded"
+        >
+          {{ errorMessage }}
+        </div>
+
+        <div *ngIf="!selectedMenu" class="text-center py-8">
+          <div class="text-gray-400 mb-4">
+            <lucide-icon [img]="Trash2" class="w-12 h-12 mx-auto"></lucide-icon>
+          </div>
+          <p class="text-gray-500">Select a menu item to delete</p>
+        </div>
+
+        <div *ngIf="selectedMenu" class="space-y-4">
+          <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+            <div class="flex">
+              <div class="shrink-0">
+                <lucide-icon [img]="AlertTriangle" class="h-5 w-5 text-red-400"></lucide-icon>
+              </div>
+              <div class="ml-3">
+                <h3 class="text-sm font-medium text-red-800">
+                  Warning: This action cannot be undone
+                </h3>
+                <div class="mt-2 text-sm text-red-700">
+                  <p>You are about to permanently delete this menu item from your catalog.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="border rounded-lg p-4">
+            <div class="flex items-start space-x-4">
+              <img
+                [src]="selectedMenu.imageUrl"
+                [alt]="selectedMenu.name"
+                class="w-20 h-20 rounded-lg object-cover"
+                (error)="$event.target.src = 'https://via.placeholder.com/80x80?text=No+Image'"
+              />
+              <div class="flex-1">
+                <h3 class="text-lg font-semibold text-gray-900">{{ selectedMenu.name }}</h3>
+                <p class="text-gray-600 mt-1">{{ selectedMenu.description }}</p>
+                <div class="flex items-center justify-between mt-2">
+                  <span class="text-xl font-bold text-red-600">${{ selectedMenu.price }}</span>
+                  <span class="text-sm text-gray-500">Stock: {{ selectedMenu.stock }}</span>
+                </div>
+                <p class="text-sm text-gray-500 mt-1">
+                  Category: {{ getCategoryName(selectedMenu.categoryId) }}
+                </p>
+                <div class="flex items-center mt-2">
+                  <span
+                    *ngIf="selectedMenu.isFeatured"
+                    class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800"
+                  >
+                    ★ Featured Item
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex gap-4 pt-4">
+            <button
+              (click)="confirmDelete()"
+              [disabled]="isDeleting"
+              class="flex-1 bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <span *ngIf="!isDeleting">Delete Menu Item</span>
+              <span *ngIf="isDeleting">Deleting...</span>
+            </button>
+
+            <button
+              type="button"
+              (click)="goBack()"
+              class="px-6 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

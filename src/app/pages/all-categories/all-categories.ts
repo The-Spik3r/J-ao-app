@@ -1,8 +1,8 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { LucideAngularModule, ArrowLeft, Search, Grid, List } from 'lucide-angular';
-import { Categories } from '../../services/categories';
+import { CategoriesService } from '../../services/categories';
 import { CategoriesItems } from '../../components/categories-items/categories-items';
 
 interface CategoriesResponse {
@@ -11,6 +11,24 @@ interface CategoriesResponse {
   description: string;
   fotoUrl: string;
   marketStallId: number;
+  marketStall: {
+    id: number;
+    name: string;
+    description: string;
+    location: string;
+    views: number;
+    sellerId: number;
+  };
+  menus: {
+    id: number;
+    name: string;
+    price: number;
+    stock: number;
+    description: string;
+    imageUrl: string;
+    isFeatured: boolean;
+    categoryId: number;
+  }[];
 }
 
 @Component({
@@ -26,6 +44,9 @@ export class AllCategories implements OnInit {
   readonly Grid = Grid;
   readonly List = List;
 
+  private router = inject(Router);
+  private categoriesService = inject(CategoriesService);
+
   categories = signal<CategoriesResponse[]>([]);
   loading = signal<boolean>(true);
   error = signal<string>('');
@@ -33,18 +54,16 @@ export class AllCategories implements OnInit {
   filteredCategories = signal<CategoriesResponse[]>([]);
   viewMode = signal<'grid' | 'list'>('grid');
 
-  constructor(private router: Router, private categoriesService: Categories) {}
-
-  async ngOnInit() {
-    await this.loadAllCategories();
+  ngOnInit() {
+    this.loadAllCategories();
   }
 
   private async loadAllCategories() {
+    this.loading.set(true);
     try {
-      this.loading.set(true);
-      await this.categoriesService.getAllCategories();
-      this.categories.set(this.categoriesService.categories);
-      this.filteredCategories.set(this.categoriesService.categories);
+      const categories = await this.categoriesService.getAllCategories();
+      this.categories.set(categories);
+      this.filteredCategories.set(categories);
     } catch (error) {
       this.error.set('Error loading categories');
       console.error('Error loading categories:', error);

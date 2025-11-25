@@ -12,7 +12,7 @@
     </div>
   </div>
   <div class="flex flex-1 gap-2 overflow-x-auto">
-    @for (menu of MenuService.menusItems; track menu) {
+    @for (menu of MenuService.menus; track menu) {
     <app-menu-items
       [id]="menu.id"
       [imagen]="menu.imageUrl"

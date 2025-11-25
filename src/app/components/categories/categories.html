@@ -37,8 +37,11 @@
       </div>
     </div>
     <div class="grid grid-cols-4 gap-4 mt-4">
-      @for (category of this.categoriesService.categories; track $index) {
-      <app-categories-items [title]="category.name"></app-categories-items>
+      @for (category of categories(); track category.id) {
+      <app-categories-items
+        [title]="category.name"
+        [imageUrl]="category.fotoUrl"
+      ></app-categories-items>
       }
     </div>
   </div>

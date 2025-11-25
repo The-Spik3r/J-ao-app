@@ -2,7 +2,8 @@ import { Component, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LucideAngularModule, ArrowLeft, ShoppingCart, Star, Heart } from 'lucide-angular';
-import { Menus } from '../../services/menus';
+import { MenusService } from '../../services/menus';
+import { CartService } from '../../services/cart';
 
 interface MenuDetailData {
   id: number;
@@ -33,7 +34,12 @@ export class MenuDetail implements OnInit {
   error = signal<string>('');
   quantity = signal<number>(1);
 
-  constructor(private route: ActivatedRoute, private router: Router, private menuService: Menus) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private menuService: MenusService,
+    private cartService: CartService
+  ) {}
 
   async ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -84,10 +90,17 @@ export class MenuDetail implements OnInit {
   addToCart() {
     const menuItem = this.menu();
     const qty = this.quantity();
-    if (menuItem) {
-      // TODO: Implement cart logic
-      console.log(`Adding ${qty} x ${menuItem.name} to cart`);
-      // Here you can call a cart service
+    if (menuItem && qty > 0) {
+      const success = this.cartService.addToCart(menuItem, qty);
+      if (success) {
+        console.log(`Added ${qty} x ${menuItem.name} to cart`);
+        // Opcionalmente puedes mostrar una notificación de éxito
+        // this.showSuccessMessage(`${menuItem.name} added to cart!`);
+      } else {
+        console.log('Failed to add item to cart - insufficient stock');
+        // Opcionalmente puedes mostrar una notificación de error
+        // this.showErrorMessage('Not enough stock available');
+      }
     }
   }
 
