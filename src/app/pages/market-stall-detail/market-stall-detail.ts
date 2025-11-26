@@ -9,6 +9,7 @@ import {
   User,
   Star,
   ShoppingCart,
+  Sparkles,
 } from 'lucide-angular';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
@@ -81,6 +82,7 @@ export class MarketStallDetail implements OnInit {
   readonly User = User;
   readonly Star = Star;
   readonly ShoppingCart = ShoppingCart;
+  readonly Sparkles = Sparkles;
 
   private route = inject(ActivatedRoute);
   private router = inject(Router);

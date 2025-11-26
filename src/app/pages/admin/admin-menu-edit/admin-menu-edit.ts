@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { LucideAngularModule, ArrowLeft } from 'lucide-angular';
+import { LucideAngularModule, ArrowLeft, Sparkles } from 'lucide-angular';
 import { MenusService } from '../../../services/menus';
 import { CategoriesService } from '../../../services/categories';
 import { Auth } from '../../../services/auth';
@@ -16,6 +16,7 @@ import { MarketStallsService } from '../../../services/market-stalls';
 })
 export class AdminMenuEditComponent implements OnInit {
   readonly ArrowLeft = ArrowLeft;
+  readonly Sparkles = Sparkles;
 
   private fb = inject(FormBuilder);
   private router = inject(Router);

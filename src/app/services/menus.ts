@@ -42,9 +42,14 @@ export class MenusService {
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
       }
-      const data = (await res.json()) as MenuResponse[];
-      this.menus = data;
-      return data;
+      const data = (await res.json()) as any[];
+      // Agregar valores por defecto si no vienen de la API
+      this.menus = data.map(menu => ({
+        ...menu,
+        isHappyHour: menu.isHappyHour ?? false,
+        discountPercentage: menu.discountPercentage ?? 0,
+      })) as MenuResponse[];
+      return this.menus;
     } catch (error) {
       this.menus = [];
       console.error('Error fetching menus:', error);
@@ -63,8 +68,17 @@ export class MenusService {
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
       }
-      const data = (await res.json()) as MenuResponse;
-      return data;
+      const data = (await res.json()) as any;
+      // Agregar valores por defecto si no vienen de la API
+      // TEMPORAL: Si el menú es featured, activar happy hour para testing
+      const menu = {
+        ...data,
+        isHappyHour: data.isHappyHour ?? (data.isFeatured ? true : false),
+        discountPercentage: data.discountPercentage ?? (data.isFeatured ? 20 : 0),
+      } as MenuResponse;
+      console.log('Menu data from API:', data);
+      console.log('Menu data processed:', menu);
+      return menu;
     } catch (error) {
       console.error('Error fetching menu by id:', error);
       return null;

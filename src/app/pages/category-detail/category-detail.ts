@@ -1,7 +1,7 @@
 import { Component, OnInit, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LucideAngularModule, ArrowLeft, Store, ShoppingCart, Star } from 'lucide-angular';
+import { LucideAngularModule, ArrowLeft, Store, ShoppingCart, Star, Sparkles } from 'lucide-angular';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { CategoriesService } from '../../services/categories';
@@ -46,6 +46,7 @@ export class CategoryDetail implements OnInit {
   readonly Store = Store;
   readonly ShoppingCart = ShoppingCart;
   readonly Star = Star;
+  readonly Sparkles = Sparkles;
 
   private route = inject(ActivatedRoute);
   private router = inject(Router);

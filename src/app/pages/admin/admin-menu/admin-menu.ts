@@ -5,7 +5,7 @@ import { LucideAngularModule, Plus, Edit, Trash2 } from 'lucide-angular';
 
 @Component({
   selector: 'app-admin-menu',
-  imports: [CommonModule, LucideAngularModule],
+  imports: [CommonModule, LucideAngularModule, RouterLink],
   templateUrl: './admin-menu.html',
   styleUrl: './admin-menu.css',
 })

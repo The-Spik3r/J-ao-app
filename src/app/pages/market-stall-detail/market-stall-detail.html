@@ -159,9 +159,10 @@
                       </div>
                       } @if (menu.isHappyHour) {
                       <div
-                        class="bg-green-400 text-green-900 px-2 py-1 rounded-full text-xs font-semibold"
+                        class="bg-green-400 text-green-900 px-2 py-1 rounded-full text-xs font-semibold flex items-center gap-1"
                       >
-                        🎉 -{{ menu.discountPercentage }}%
+                        <lucide-angular [img]="Sparkles" class="w-3 h-3"></lucide-angular>
+                        -{{ menu.discountPercentage }}%
                       </div>
                       }
                     </div>
