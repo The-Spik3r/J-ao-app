@@ -14,6 +14,8 @@ interface MenuResponse {
   imageUrl: string;
   categoryId: number;
   isFeatured: boolean;
+  isHappyHour: boolean;
+  discountPercentage: number;
 }
 
 @Component({

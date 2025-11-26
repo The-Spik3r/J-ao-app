@@ -63,6 +63,8 @@ interface CategoriesResponse {
     imageUrl: string;
     isFeatured: boolean;
     categoryId: number;
+    isHappyHour: boolean;
+    discountPercentage: number;
   }>;
 }
 

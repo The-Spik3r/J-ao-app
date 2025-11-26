@@ -5,10 +5,11 @@ import { LucideAngularModule, ArrowLeft, Package, AlertTriangle } from 'lucide-a
 import { CategoriesService } from '../../../services/categories';
 import { Auth } from '../../../services/auth';
 import { MarketStallsService } from '../../../services/market-stalls';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-category-delete',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, LucideAngularModule],
   templateUrl: './admin-category-delete.html',
   styleUrl: './admin-category-delete.css',
 })

@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { LucideAngularModule, ArrowLeft, AlertTriangle, Trash2, Menu } from 'lucide-angular';
 import { MenusService } from '../../../services/menus';
 import { CategoriesService } from '../../../services/categories';
@@ -9,7 +10,7 @@ import { MarketStallsService } from '../../../services/market-stalls';
 
 @Component({
   selector: 'app-admin-menu-delete',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, LucideAngularModule],
   templateUrl: './admin-menu-delete.html',
   styleUrl: './admin-menu-delete.css',
 })

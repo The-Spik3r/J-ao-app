@@ -1,13 +1,14 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { LucideAngularModule, ArrowLeft, AlertTriangle } from 'lucide-angular';
 import { MarketStallsService } from '../../../services/market-stalls';
 import { Auth } from '../../../services/auth';
 
 @Component({
   selector: 'app-admin-market-stall-delete',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, LucideAngularModule],
   templateUrl: './admin-market-stall-delete.html',
   styleUrl: './admin-market-stall-delete.css',
 })

@@ -9,6 +9,8 @@ export interface MenuResponse {
   imageUrl: string;
   categoryId: number;
   isFeatured: boolean;
+  isHappyHour: boolean;
+  discountPercentage: number;
 }
 
 export interface CreateMenuRequest {
@@ -19,6 +21,8 @@ export interface CreateMenuRequest {
   imageUrl: string;
   categoryId: number;
   isFeatured: boolean;
+  isHappyHour: boolean;
+  discountPercentage: number;
 }
 
 @Injectable({

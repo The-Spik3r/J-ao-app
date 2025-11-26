@@ -55,6 +55,12 @@ export class CartService {
       return false;
     }
 
+    // Calculate the actual price (with discount if applicable)
+    let actualPrice = menu.price;
+    if (menu.isHappyHour && menu.discountPercentage > 0) {
+      actualPrice = menu.price * (1 - menu.discountPercentage / 100);
+    }
+
     const currentItems = this.cartItems();
     const existingItemIndex = currentItems.findIndex((item) => item.id === menu.id);
 
@@ -88,7 +94,7 @@ export class CartService {
       const newItem: CartItem = {
         id: menu.id,
         name: menu.name,
-        price: menu.price,
+        price: actualPrice,
         quantity: quantity,
         imageUrl: menu.imageUrl,
         stock: menu.stock,

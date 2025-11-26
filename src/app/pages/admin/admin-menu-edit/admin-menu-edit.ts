@@ -32,6 +32,8 @@ export class AdminMenuEditComponent implements OnInit {
     imageUrl: ['', [Validators.required]],
     categoryId: [0, [Validators.required]],
     isFeatured: [false],
+    isHappyHour: [false],
+    discountPercentage: [0],
   });
 
   menus: any[] = [];
@@ -46,6 +48,24 @@ export class AdminMenuEditComponent implements OnInit {
   async ngOnInit() {
     await this.loadSellerData();
     await this.loadMenus();
+    this.setupHappyHourValidation();
+  }
+
+  setupHappyHourValidation() {
+    this.menuForm.get('isHappyHour')?.valueChanges.subscribe((isHappyHour) => {
+      const discountControl = this.menuForm.get('discountPercentage');
+      if (isHappyHour) {
+        discountControl?.setValidators([
+          Validators.required,
+          Validators.min(1),
+          Validators.max(100),
+        ]);
+      } else {
+        discountControl?.clearValidators();
+        discountControl?.setValue(0);
+      }
+      discountControl?.updateValueAndValidity();
+    });
   }
 
   async loadSellerData() {
@@ -101,6 +121,8 @@ export class AdminMenuEditComponent implements OnInit {
       imageUrl: menu.imageUrl,
       categoryId: menu.categoryId,
       isFeatured: menu.isFeatured,
+      isHappyHour: menu.isHappyHour || false,
+      discountPercentage: menu.discountPercentage || 0,
     });
   }
 

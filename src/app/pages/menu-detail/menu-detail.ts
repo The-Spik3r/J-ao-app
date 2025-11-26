@@ -16,6 +16,8 @@ interface MenuDetailData {
   imageUrl: string;
   categoryId: number;
   isFeatured: boolean;
+  isHappyHour: boolean;
+  discountPercentage: number;
 }
 
 @Component({
@@ -94,6 +96,18 @@ export class MenuDetail implements OnInit {
       if (!success) {
       }
     }
+  }
+
+  getDiscountedPrice(): number {
+    const menuItem = this.menu();
+    if (menuItem && menuItem.isHappyHour && menuItem.discountPercentage > 0) {
+      return menuItem.price * (1 - menuItem.discountPercentage / 100);
+    }
+    return menuItem?.price || 0;
+  }
+
+  getTotalPrice(): number {
+    return this.getDiscountedPrice() * this.quantity();
   }
 
   toggleFavorite() {}
