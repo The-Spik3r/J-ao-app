@@ -1,13 +1,21 @@
-<div class="p-4">
-  <div>
-    <h2 class="font-semibold text-lg text-gray-800">What Service Do You Want</h2>
+<div class="p-4 lg:p-0">
+  <div class="lg:mb-6">
+    <h2 class="font-semibold text-lg lg:text-xl text-gray-800 lg:hidden">
+      What Service Do You Want
+    </h2>
+    <h2 class="hidden lg:block font-bold text-2xl text-gray-900 mb-2">Find Your Perfect Meal</h2>
+    <p class="hidden lg:block text-gray-600 mb-4">Discover amazing food from local market stalls</p>
   </div>
-  <div class="relative">
+
+  <div class="relative mt-4 lg:mt-0">
     <input
       type="text"
       placeholder="Search for services..."
-      class="w-full bg-white mt-4 p-3 pr-10  rounded-full focus:outline-none focus:ring-2 focus:ring-red-500 text-gray-700"
+      class="w-full bg-white p-3 pr-12 lg:p-4 lg:pr-14 rounded-full lg:rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 text-gray-700 shadow-sm lg:shadow-md border lg:border-gray-200 text-sm lg:text-base"
     />
-    <lucide-icon [img]="SearchIcon" class="w-6 h-6 absolute right-2 top-6.5 transform -translate-y-1/2 text-gray-400 pointer-events-none"></lucide-icon>
+    <lucide-icon
+      [img]="SearchIcon"
+      class="w-5 h-5 lg:w-6 lg:h-6 absolute right-3 lg:right-4 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"
+    ></lucide-icon>
   </div>
 </div>

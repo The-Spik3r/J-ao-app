@@ -10,7 +10,6 @@ import { MarketStallsService } from '../../../services/market-stalls';
 
 @Component({
   selector: 'app-admin-menu-edit',
-  standalone: true,
   imports: [CommonModule, ReactiveFormsModule, LucideAngularModule],
   templateUrl: './admin-menu-edit.html',
   styleUrl: './admin-menu-edit.css',
@@ -78,11 +77,9 @@ export class AdminMenuEditComponent implements OnInit {
   async loadMenus() {
     try {
       const allMenus = await this.menusService.getAllMenus();
-      // Filter menus by categories that belong to this market stall
       const categoryIds = this.categories.map((cat) => cat.id);
       this.menus = allMenus.filter((menu) => categoryIds.includes(menu.categoryId));
 
-      // If there are menus, select the first one for editing
       if (this.menus.length > 0) {
         this.selectMenu(this.menus[0]);
       }

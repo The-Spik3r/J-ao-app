@@ -1,0 +1,168 @@
+<p-toast position="top-center"></p-toast>
+<div class="min-h-screen bg-gray-50">
+  <div class="bg-white shadow-sm border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <button
+          (click)="goBack()"
+          class="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors"
+        >
+          <lucide-angular [img]="ArrowLeft" class="w-5 h-5"></lucide-angular>
+          <span class="font-medium">Back to Categories</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  @if (loading()) {
+  <div class="flex justify-center items-center py-12">
+    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
+    <span class="ml-3 text-gray-600">Loading category details...</span>
+  </div>
+  } @if (error()) {
+  <div class="max-w-2xl mx-auto mt-8 p-4">
+    <div class="bg-red-50 border border-red-200 rounded-lg p-4 text-center">
+      <p class="text-red-800">{{ error() }}</p>
+      <button
+        (click)="goBack()"
+        class="mt-3 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+      >
+        Back to Categories
+      </button>
+    </div>
+  </div>
+  } @if (!loading() && !error() && category()) {
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
+      <div class="p-8">
+        <div class="flex flex-col md:flex-row md:items-start md:space-x-6">
+          <div class="shrink-0 mb-6 md:mb-0">
+            <div
+              class="w-32 h-32 bg-linear-to-br from-red-400 to-red-600 rounded-xl flex items-center justify-center overflow-hidden"
+            >
+              @if (category()!.fotoUrl) {
+              <img
+                [src]="category()!.fotoUrl"
+                [alt]="category()!.name"
+                class="w-full h-full object-cover"
+              />
+              } @else {
+              <span class="text-white font-bold text-5xl">
+                {{ category()!.name.charAt(0).toUpperCase() }}
+              </span>
+              }
+            </div>
+          </div>
+
+          <div class="flex-1">
+            <h1 class="text-3xl font-bold text-gray-900 mb-3">{{ category()!.name }}</h1>
+            <p class="text-gray-600 text-lg mb-6">{{ category()!.description }}</p>
+
+            <div class="bg-gray-50 rounded-lg p-4">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <div class="bg-red-100 rounded-full p-2 mr-3">
+                    <lucide-angular [img]="Store" class="w-5 h-5 text-red-600"></lucide-angular>
+                  </div>
+                  <div>
+                    <p class="text-sm text-gray-500">Market Stall</p>
+                    <p class="font-semibold text-gray-900">{{ category()!.marketStall.name }}</p>
+                    <p class="text-sm text-gray-500">{{ category()!.marketStall.location }}</p>
+                  </div>
+                </div>
+                <button
+                  (click)="navigateToMarketStall(category()!.marketStallId)"
+                  class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-sm font-medium"
+                >
+                  View Stall
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-8">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-2xl font-bold text-gray-900">Products ({{ category()!.menus.length }})</h2>
+      </div>
+
+      @if (category()!.menus.length === 0) {
+      <div class="text-center py-12 bg-white rounded-xl shadow">
+        <p class="text-gray-500">No products available in this category yet.</p>
+      </div>
+      } @if (category()!.menus.length > 0) {
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        @for (menu of category()!.menus; track menu.id) {
+        <div
+          class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+        >
+          <div class="h-48 bg-linear-to-br from-gray-200 to-gray-300 relative overflow-hidden">
+            @if (menu.imageUrl) {
+            <img [src]="menu.imageUrl" [alt]="menu.name" class="w-full h-full object-cover" />
+            } @else {
+            <div class="flex items-center justify-center h-full">
+              <span class="text-gray-500 font-bold text-4xl">
+                {{ menu.name.charAt(0).toUpperCase() }}
+              </span>
+            </div>
+            } @if (menu.isFeatured) {
+            <div class="absolute top-2 right-2">
+              <div
+                class="bg-yellow-400 text-yellow-900 px-2 py-1 rounded-full text-xs font-semibold flex items-center"
+              >
+                <lucide-angular [img]="Star" class="w-3 h-3 mr-1"></lucide-angular>
+                Featured
+              </div>
+            </div>
+            } @if (menu.stock === 0) {
+            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+              <span class="text-white font-bold text-lg">Out of Stock</span>
+            </div>
+            }
+          </div>
+
+          <div class="p-5">
+            <h3 class="font-bold text-gray-900 text-lg mb-2 line-clamp-1">{{ menu.name }}</h3>
+            <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ menu.description }}</p>
+
+            <div class="flex items-center justify-between mb-4">
+              <div class="text-2xl font-bold text-red-500">
+                ${{ menu.price | number : '1.2-2' }}
+              </div>
+              <div class="text-sm text-gray-500">
+                <span
+                  [class.text-red-500]="menu.stock < 10"
+                  [class.font-semibold]="menu.stock < 10"
+                >
+                  Stock: {{ menu.stock }}
+                </span>
+              </div>
+            </div>
+
+            <div class="flex space-x-2">
+              <button
+                (click)="navigateToMenu(menu.id)"
+                class="flex-1 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium"
+              >
+                View Details
+              </button>
+              <button
+                (click)="addToCart(menu)"
+                [disabled]="menu.stock === 0"
+                class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center"
+                title="Add to cart"
+              >
+                <lucide-angular [img]="ShoppingCart" class="w-4 h-4"></lucide-angular>
+              </button>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+      }
+    </div>
+  </div>
+  }
+</div>

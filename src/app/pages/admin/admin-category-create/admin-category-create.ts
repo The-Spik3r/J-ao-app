@@ -9,7 +9,6 @@ import { MarketStallsService } from '../../../services/market-stalls';
 
 @Component({
   selector: 'app-admin-category-create',
-  standalone: true,
   imports: [CommonModule, ReactiveFormsModule, LucideAngularModule],
   templateUrl: './admin-category-create.html',
   styleUrl: './admin-category-create.css',
@@ -47,7 +46,6 @@ export class AdminCategoryCreateComponent implements OnInit {
       const sellerData = await this.authService.me();
       this.sellerId = sellerData.id;
 
-      // Get market stall to obtain marketStallId
       const marketStall = await this.marketStallsService.getMarketStallBySeller(this.sellerId);
       this.marketStallId = marketStall.id;
       this.isLoading = false;

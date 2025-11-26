@@ -1,7 +1,9 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LucideAngularModule, ArrowLeft, ShoppingCart, Star, Heart } from 'lucide-angular';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 import { MenusService } from '../../services/menus';
 import { CartService } from '../../services/cart';
 
@@ -18,8 +20,7 @@ interface MenuDetailData {
 
 @Component({
   selector: 'app-menu-detail',
-  standalone: true,
-  imports: [CommonModule, LucideAngularModule],
+  imports: [CommonModule, LucideAngularModule, ToastModule],
   templateUrl: './menu-detail.html',
   styleUrl: './menu-detail.css',
 })
@@ -29,17 +30,15 @@ export class MenuDetail implements OnInit {
   readonly Star = Star;
   readonly Heart = Heart;
 
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private menuService = inject(MenusService);
+  private cartService = inject(CartService);
+
   menu = signal<MenuDetailData | null>(null);
   loading = signal<boolean>(true);
   error = signal<string>('');
   quantity = signal<number>(1);
-
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private menuService: MenusService,
-    private cartService: CartService
-  ) {}
 
   async ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -92,20 +91,10 @@ export class MenuDetail implements OnInit {
     const qty = this.quantity();
     if (menuItem && qty > 0) {
       const success = this.cartService.addToCart(menuItem, qty);
-      if (success) {
-        console.log(`Added ${qty} x ${menuItem.name} to cart`);
-        // Opcionalmente puedes mostrar una notificación de éxito
-        // this.showSuccessMessage(`${menuItem.name} added to cart!`);
-      } else {
-        console.log('Failed to add item to cart - insufficient stock');
-        // Opcionalmente puedes mostrar una notificación de error
-        // this.showErrorMessage('Not enough stock available');
+      if (!success) {
       }
     }
   }
 
-  toggleFavorite() {
-    // TODO: Implement favorites logic
-    console.log('Toggle favorite');
-  }
+  toggleFavorite() {}
 }

@@ -1,8 +1,43 @@
-<div class="bg-[#f6f6f6] h-full">
-  <app-nav></app-nav>
-  <app-search></app-search>
-  <app-categories></app-categories>
-  <app-market-stalls></app-market-stalls>
-  <app-menus></app-menus>
-  <app-bnav></app-bnav>
+<div class="bg-[#f6f6f6] min-h-screen">
+  <div class="hidden lg:block">
+    <div class="sticky top-0 z-50 bg-white shadow-sm">
+      <div class="max-w-7xl mx-auto">
+        <app-nav></app-nav>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 py-6">
+      <div class="grid grid-cols-12 gap-6">
+        <div class="col-span-3">
+          <div class="sticky top-24">
+            <app-search></app-search>
+            <div class="mt-6">
+              <app-categories></app-categories>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-span-9">
+          <div class="space-y-8">
+            <section>
+              <app-market-stalls></app-market-stalls>
+            </section>
+
+            <section>
+              <app-menus></app-menus>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="md:hidden">
+    <app-nav></app-nav>
+    <app-search></app-search>
+    <app-categories></app-categories>
+    <app-market-stalls></app-market-stalls>
+    <app-menus></app-menus>
+    <app-bnav></app-bnav>
+  </div>
 </div>

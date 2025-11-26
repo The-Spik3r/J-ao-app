@@ -22,6 +22,9 @@ import { AdminMenuCreateComponent } from './pages/admin/admin-menu-create/admin-
 import { AdminMenuEditComponent } from './pages/admin/admin-menu-edit/admin-menu-edit';
 import { AdminMenuDeleteComponent } from './pages/admin/admin-menu-delete/admin-menu-delete';
 import { Cart } from './pages/cart/cart';
+import { MarketStallDetail } from './pages/market-stall-detail/market-stall-detail';
+import { CategoryDetail } from './pages/category-detail/category-detail';
+import { authGuard } from './guards/auth-guard-guard';
 
 export const routes: Routes = [
   {
@@ -55,6 +58,7 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: Admin,
+    canActivate: [authGuard],
     children: [
       {
         path: '',
@@ -113,5 +117,13 @@ export const routes: Routes = [
   {
     path: 'menu/:id',
     component: MenuDetail,
+  },
+  {
+    path: 'market-stall/:id',
+    component: MarketStallDetail,
+  },
+  {
+    path: 'category/:id',
+    component: CategoryDetail,
   },
 ];

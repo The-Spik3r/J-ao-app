@@ -1,21 +1,78 @@
-<nav class="p-4 flex justify-between items-center">
-  <div class="flex gap-2">
-    <div>
-      <img class="w-14 h-14 bg-black rounded-full" src="https://i.pinimg.com/736x/25/12/b6/2512b69f4bb9e52d58d557fccb0efcb8.jpg" alt="User Avatar">
+<nav class="p-4 lg:px-6 lg:py-4 flex justify-between items-center">
+  <div class="flex gap-2 lg:gap-4">
+    <div class="hidden lg:flex items-center mr-6">
+      <h1 class="text-2xl font-bold text-red-500">J-ao</h1>
     </div>
-    <div>
+
+    <div class="flex gap-2 lg:gap-3">
+      <img
+        class="w-12 h-12 lg:w-14 lg:h-14 bg-black rounded-full object-cover"
+        src="https://i.pinimg.com/736x/25/12/b6/2512b69f4bb9e52d58d557fccb0efcb8.jpg"
+        alt="User Avatar"
+      />
+    </div>
+    <div class="flex flex-col justify-center">
       <div>
-        <span class="text-gray-700 text-sm">Hello {{this.authService.sellerData?.firstName ? this.authService.sellerData?.firstName : 'Guest'}}</span>
+        <span class="text-gray-700 text-sm lg:text-base">
+          Hello
+          {{
+            this.authService.sellerData?.firstName
+              ? this.authService.sellerData?.firstName
+              : 'Guest'
+          }}
+        </span>
       </div>
       <div class="flex items-center gap-1">
         <lucide-icon [img]="MapPin" class="w-4 h-4 text-gray-600"></lucide-icon>
-        <span class="text-lg font-semibold text-gray-600">Argentina</span>
+        <span class="text-base lg:text-lg font-semibold text-gray-600">Argentina</span>
       </div>
     </div>
   </div>
-  <div>
-    <button class=" rounded-full bg-white p-3">
-      <lucide-icon [img]="BellDot" class="w-6 h-6 text-gray-500"></lucide-icon>
+
+  <div class="hidden lg:flex items-center space-x-6">
+    <a routerLink="/" class="text-gray-600 hover:text-red-500 transition-colors cursor-pointer"
+      >Home</a
+    >
+    <a
+      routerLink="/categories"
+      class="text-gray-600 hover:text-red-500 transition-colors cursor-pointer"
+      >Categories</a
+    >
+    <a
+      routerLink="/market-stalls"
+      class="text-gray-600 hover:text-red-500 transition-colors cursor-pointer"
+      >Market Stalls</a
+    >
+    <a routerLink="/menus" class="text-gray-600 hover:text-red-500 transition-colors cursor-pointer"
+      >Menus</a
+    >
+  </div>
+
+  <div class="flex items-center gap-2 lg:gap-4">
+    <button
+      class="hidden lg:block rounded-full bg-gray-100 p-2 hover:bg-gray-200 transition-colors"
+    >
+      <lucide-icon [img]="Search" class="w-5 h-5 text-gray-500"></lucide-icon>
+    </button>
+
+    <button
+      routerLink="/cart"
+      class="hidden lg:flex relative rounded-full bg-gray-100 p-2 hover:bg-gray-200 transition-colors"
+    >
+      <lucide-icon [img]="ShoppingCart" class="w-5 h-5 text-gray-500"></lucide-icon>
+      @if (hasItems) {
+      <span
+        class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center"
+      >
+        {{ totalItems }}
+      </span>
+      }
+    </button>
+
+    <button
+      class="rounded-full bg-white lg:bg-gray-100 p-2 lg:p-3 hover:bg-gray-200 transition-colors shadow-sm lg:shadow-none"
+    >
+      <lucide-icon [img]="BellDot" class="w-5 h-5 lg:w-6 lg:h-6 text-gray-500"></lucide-icon>
     </button>
   </div>
 </nav>

@@ -31,19 +31,19 @@ interface marketStallResponse {
   sellerId: number;
 }
 
-interface AuthMeResponse{
-  id: number,
-  firstName: string,
-  lastName: string,
-  email: string,
-  state: number,
+interface AuthMeResponse {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  state: number;
   marketStall: {
-    id: number,
-    name: string,
-    description: string,
-    location: string,
-    sellerId: number
-  }
+    id: number;
+    name: string;
+    description: string;
+    location: string;
+    sellerId: number;
+  };
 }
 
 @Injectable({
@@ -54,6 +54,11 @@ export class Auth {
   sellerData: AuthMeResponse | null = null;
   private baseUrl: string = 'https://localhost:7200/api/';
 
+  isLoggedIn(): boolean {
+    this.token = this.token || localStorage.getItem('token');
+    return !!this.token && this.token !== '';
+  }
+
   async logIn(email: string, password: string) {
     try {
       const res = await fetch(this.baseUrl + 'authentication/authenticate', {
@@ -63,7 +68,6 @@ export class Auth {
         },
         body: JSON.stringify({ email: email, password: password }),
       });
-      console.log(res);
 
       this.token = await res.text();
       localStorage.setItem('token', this.token || '');
@@ -79,19 +83,19 @@ export class Auth {
     }
   }
 
-  async me(){
+  async me() {
     try {
       const res = await fetch(this.baseUrl + 'Seller/me', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.token}`
+          Authorization: `Bearer ${this.token}`,
         },
       });
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
       }
-      const data = await res.json() as AuthMeResponse;
+      const data = (await res.json()) as AuthMeResponse;
       this.sellerData = data;
       return data;
     } catch (error) {

@@ -1,38 +1,45 @@
 <div
-  class="bg-white rounded-lg shadow-md w-full overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 h-full cursor-pointer"
+  class="bg-white rounded-lg shadow-md w-full lg:w-auto overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 h-full cursor-pointer min-w-[200px] lg:min-w-0"
   (click)="verDetalle()"
 >
   <div class="relative">
-    <img [src]="imagen()" [alt]="nombre()" class="w-full min-h-30 object-cover" />
+    <img [src]="imagen()" [alt]="nombre()" class="w-full h-32 lg:h-40 object-cover" />
     <div class="absolute top-2 right-2">
       <button
-        class="bg-white rounded-full p-1.5 shadow-md hover:shadow-lg transition-shadow"
+        class="bg-white rounded-full p-1.5 lg:p-2 shadow-md hover:shadow-lg transition-shadow"
         (click)="agregarAlCarrito(); $event.stopPropagation()"
       >
-        <lucide-icon [img]="ShoppingCart" class="w-3 h-3 text-gray-700"> </lucide-icon>
+        <lucide-icon [img]="ShoppingCart" class="w-3 h-3 lg:w-4 lg:h-4 text-gray-700">
+        </lucide-icon>
       </button>
     </div>
   </div>
-  <div class="p-3 flex-1">
-    <div class="flex items-start justify-between mb-1">
-      <h3 class="text-lg font-bold text-gray-900 line-clamp-1">{{ nombre() }}</h3>
-      <div class="flex items-center ml-1">
-        <lucide-icon [img]="Star" class="w-3 h-3 text-yellow-400 fill-current"> </lucide-icon>
-        <span class="text-xs text-gray-600 ml-1">4.5</span>
+  <div class="p-3 lg:p-4 flex-1">
+    <div class="flex items-start justify-between mb-2">
+      <h3 class="text-sm lg:text-lg font-bold text-gray-900 line-clamp-1 lg:line-clamp-2">
+        {{ nombre() }}
+      </h3>
+      <div class="flex items-center ml-1 shrink-0">
+        <lucide-icon [img]="Star" class="w-3 h-3 lg:w-4 lg:h-4 text-yellow-400 fill-current">
+        </lucide-icon>
+        <span class="text-xs lg:text-sm text-gray-600 ml-1">4.5</span>
       </div>
     </div>
 
-    <p class="text-gray-600 text-xs mb-3 line-clamp-1">{{ subtitulo() }}</p>
+    <p class="text-gray-600 text-xs lg:text-sm mb-3 line-clamp-1 lg:line-clamp-2">
+      {{ subtitulo() }}
+    </p>
 
     <div class="flex items-center justify-between">
       <div class="flex items-baseline">
-        <span class="text-lg font-bold text-red-600">${{ precio() }}</span>
+        <span class="text-lg lg:text-xl font-bold text-red-600">${{ precio() }}</span>
       </div>
       <button
-        class="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 shadow-sm hover:shadow-md transform hover:scale-105"
+        class="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 lg:px-4 lg:py-2 rounded-full text-xs lg:text-sm font-semibold transition-all duration-200 shadow-sm hover:shadow-md transform hover:scale-105"
         (click)="agregarAlCarrito(); $event.stopPropagation()"
       >
-        <lucide-icon [img]="ArrowRight" class="w-3 h-3 inline-block mr-1"> </lucide-icon>
+        <lucide-icon [img]="ArrowRight" class="w-3 h-3 lg:w-4 lg:h-4 inline-block mr-1">
+        </lucide-icon>
       </button>
     </div>
   </div>

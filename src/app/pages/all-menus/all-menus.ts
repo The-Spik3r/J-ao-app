@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { LucideAngularModule, ArrowLeft, Search, Filter } from 'lucide-angular';
@@ -18,7 +18,6 @@ interface MenuResponse {
 
 @Component({
   selector: 'app-all-menus',
-  standalone: true,
   imports: [CommonModule, LucideAngularModule, MenuItems],
   templateUrl: './all-menus.html',
   styleUrl: './all-menus.css',
@@ -28,13 +27,14 @@ export class AllMenus implements OnInit {
   readonly Search = Search;
   readonly Filter = Filter;
 
+  private router = inject(Router);
+  private menusService = inject(MenusService);
+
   menus = signal<MenuResponse[]>([]);
   loading = signal<boolean>(true);
   error = signal<string>('');
   searchTerm = signal<string>('');
   filteredMenus = signal<MenuResponse[]>([]);
-
-  constructor(private router: Router, private menusService: MenusService) {}
 
   async ngOnInit() {
     await this.loadAllMenus();

@@ -10,7 +10,6 @@ import { MarketStallsService } from '../../../services/market-stalls';
 
 @Component({
   selector: 'app-admin-menu-create',
-  standalone: true,
   imports: [CommonModule, ReactiveFormsModule, LucideAngularModule],
   templateUrl: './admin-menu-create.html',
   styleUrl: './admin-menu-create.css',

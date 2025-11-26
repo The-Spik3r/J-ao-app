@@ -107,6 +107,10 @@ export class AllMarketStalls implements OnInit {
     this.viewMode.set(this.viewMode() === 'grid' ? 'list' : 'grid');
   }
 
+  navigateToMarketStallDetail(stallId: number) {
+    this.router.navigate(['/market-stall', stallId]);
+  }
+
   goBack() {
     this.router.navigate(['/']);
   }

@@ -8,7 +8,6 @@ import { Auth } from '../../../services/auth';
 
 @Component({
   selector: 'app-admin-market-stall-create',
-  standalone: true,
   imports: [CommonModule, ReactiveFormsModule, LucideAngularModule],
   templateUrl: './admin-market-stall-create.html',
   styleUrl: './admin-market-stall-create.css',

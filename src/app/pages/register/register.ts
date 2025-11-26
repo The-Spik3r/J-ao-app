@@ -52,7 +52,6 @@ export class Register {
     this.errorMessage = '';
 
     if (this.currentStep === 1) {
-      // Validar paso 1: datos personales
       if (
         !this.firstName ||
         !this.lastName ||
@@ -70,7 +69,6 @@ export class Register {
         return;
       }
 
-      // Registrar el seller
       await this.registerSeller();
     }
   }
@@ -88,10 +86,7 @@ export class Register {
       state: 0,
     };
 
-    console.log('Creating seller:', sellerData);
-
     try {
-      // Aquí debes llamar al endpoint /api/Seller para crear el seller
       const response = await this.authService.registerSeller(sellerData);
       if (response?.success && response?.data?.id) {
         this.sellerId = response.data.id;
@@ -140,8 +135,6 @@ export class Register {
       location: this.stallLocation,
       sellerId: this.sellerId,
     };
-
-    console.log('Creating market stall:', marketStallData);
 
     try {
       const res = await this.authService.createMarketStall(marketStallData);

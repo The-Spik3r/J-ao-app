@@ -1,4 +1,5 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal, computed, inject } from '@angular/core';
+import { MessageService } from 'primeng/api';
 
 export interface CartItem {
   id: string;
@@ -21,11 +22,10 @@ export interface CartSummary {
 })
 export class CartService {
   private readonly CART_STORAGE_KEY = 'j-ao-cart';
+  private messageService = inject(MessageService);
 
-  // Signal para almacenar los items del carrito
   private cartItems = signal<CartItem[]>(this.loadFromStorage());
 
-  // Computed signals para cálculos automáticos
   readonly items = computed(() => this.cartItems());
   readonly totalItems = computed(() =>
     this.cartItems().reduce((total, item) => total + item.quantity, 0)
@@ -33,12 +33,11 @@ export class CartService {
   readonly subtotal = computed(() =>
     this.cartItems().reduce((total, item) => total + item.price * item.quantity, 0)
   );
-  readonly total = computed(() => this.subtotal()); // Por ahora igual al subtotal, después se pueden agregar impuestos
+  readonly total = computed(() => this.subtotal());
 
   readonly isEmpty = computed(() => this.cartItems().length === 0);
 
   constructor() {
-    // Observar cambios en el carrito y guardar en localStorage
     this.cartItems.set(this.loadFromStorage());
   }
 
@@ -47,6 +46,12 @@ export class CartService {
    */
   addToCart(menu: any, quantity: number = 1): boolean {
     if (quantity <= 0 || quantity > menu.stock) {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Invalid quantity',
+        life: 3000,
+      });
       return false;
     }
 
@@ -54,14 +59,18 @@ export class CartService {
     const existingItemIndex = currentItems.findIndex((item) => item.id === menu.id);
 
     if (existingItemIndex >= 0) {
-      // Si el item ya existe, actualizar la cantidad
       const existingItem = currentItems[existingItemIndex];
       const newQuantity = existingItem.quantity + quantity;
 
       if (newQuantity > menu.stock) {
-        return false; // No se puede agregar más de lo disponible en stock
+        this.messageService.add({
+          severity: 'warn',
+          summary: 'Stock Limit',
+          detail: `Cannot add more. Only ${menu.stock} available in stock`,
+          life: 3000,
+        });
+        return false;
       }
-
       const updatedItems = [...currentItems];
       updatedItems[existingItemIndex] = {
         ...existingItem,
@@ -69,8 +78,13 @@ export class CartService {
       };
 
       this.cartItems.set(updatedItems);
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Added to Cart',
+        detail: `${menu.name} quantity updated to ${newQuantity}`,
+        life: 3000,
+      });
     } else {
-      // Si es un nuevo item, agregarlo al carrito
       const newItem: CartItem = {
         id: menu.id,
         name: menu.name,
@@ -81,6 +95,12 @@ export class CartService {
       };
 
       this.cartItems.set([...currentItems, newItem]);
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Added to Cart',
+        detail: `${menu.name} has been added to your cart`,
+        life: 3000,
+      });
     }
 
     this.saveToStorage();
@@ -112,7 +132,7 @@ export class CartService {
       const item = currentItems[itemIndex];
 
       if (quantity > item.stock) {
-        return false; // No se puede poner más cantidad que el stock disponible
+        return false;
       }
 
       const updatedItems = [...currentItems];

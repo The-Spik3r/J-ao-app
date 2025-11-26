@@ -112,7 +112,7 @@
           />
           } @else {
           <div
-            class="h-12 w-12 bg-gradient-to-br from-red-400 to-red-600 rounded-full flex items-center justify-center"
+            class="h-12 w-12 bg-linear-to-br from-red-400 to-red-600 rounded-full flex items-center justify-center"
           >
             <span class="text-white font-bold text-lg">{{
               category.name.charAt(0).toUpperCase()
@@ -126,16 +126,14 @@
       </div>
       }
     </div>
-    }
-
-    @if (viewMode() === 'list') {
+    } @if (viewMode() === 'list') {
     <div class="space-y-4">
       @for (category of filteredCategories(); track category.id) {
       <div
         (click)="navigateToCategory(category.id)"
         class="bg-white p-4 rounded-xl flex items-center gap-4 shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer hover:-translate-y-0.5"
       >
-        <div class="flex-shrink-0">
+        <div class="shrink-0">
           @if (category.fotoUrl) {
           <img
             [src]="category.fotoUrl"
@@ -144,7 +142,7 @@
           />
           } @else {
           <div
-            class="h-16 w-16 bg-gradient-to-br from-red-400 to-red-600 rounded-full flex items-center justify-center"
+            class="h-16 w-16 bg-linear-to-br from-red-400 to-red-600 rounded-full flex items-center justify-center"
           >
             <span class="text-white font-bold text-xl">{{
               category.name.charAt(0).toUpperCase()
@@ -156,7 +154,7 @@
           <h3 class="text-lg font-semibold text-gray-900 truncate">{{ category.name }}</h3>
           <p class="text-gray-600 text-sm mt-1">{{ category.description }}</p>
         </div>
-        <div class="flex-shrink-0">
+        <div class="shrink-0">
           <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               stroke-linecap="round"

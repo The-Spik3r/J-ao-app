@@ -7,8 +7,7 @@ import { Auth } from '../../../services/auth';
 
 @Component({
   selector: 'app-admin-market-stall-delete',
-  standalone: true,
-  imports: [CommonModule, LucideAngularModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './admin-market-stall-delete.html',
   styleUrl: './admin-market-stall-delete.css',
 })

@@ -9,8 +9,7 @@ import { MarketStallsService } from '../../../services/market-stalls';
 
 @Component({
   selector: 'app-admin-menu-delete',
-  standalone: true,
-  imports: [CommonModule, LucideAngularModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './admin-menu-delete.html',
   styleUrl: './admin-menu-delete.css',
 })
@@ -69,7 +68,6 @@ export class AdminMenuDeleteComponent implements OnInit {
   async loadMenus() {
     try {
       const allMenus = await this.menusService.getAllMenus();
-      // Filter menus by categories that belong to this market stall
       const categoryIds = this.categories.map((cat) => cat.id);
       this.menus = allMenus.filter((menu) => categoryIds.includes(menu.categoryId));
       this.isLoading = false;

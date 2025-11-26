@@ -124,10 +124,8 @@ export class CategoriesService {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      // Handle 204 No Content response (successful update with no body)
       let data: CategoriesResponse;
       if (response.status === 204 || response.headers.get('content-length') === '0') {
-        // Create a mock response for 204 No Content
         data = { id, ...category } as CategoriesResponse;
       } else {
         data = await response.json();

@@ -1,44 +1,45 @@
-<div class="w-full h-full p-2 flex flex-col gap-4">
-  <div class="w-full h-[30%] bg-red-500 rounded-2xl">
-    <div class="flex">
-      <div class="text-white flex flex-col gap-3 p-4">
-        <div>
-          <h1 class="text-3xl">Fast Bites, Faster Orders.</h1>
-        </div>
+<div class="w-full h-full p-2 lg:p-0 flex flex-col gap-4 lg:gap-6">
+  <div
+    class="w-full lg:hidden bg-linear-to-r from-red-500 to-red-600 rounded-2xl overflow-hidden shadow-lg"
+  >
+    <div class="flex h-32">
+      <div class="flex-1 text-white flex flex-col justify-center gap-2 p-4">
+        <h1 class="text-2xl font-bold leading-tight">Fast Bites, Faster Orders.</h1>
+        <p class="text-sm opacity-90">Up to 3 times per day</p>
       </div>
-      <div>
+      <div class="w-24 relative">
         <img
-          class="w-full object-cover"
+          class="absolute inset-0 w-full h-full object-cover"
           src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Zm9vZHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
           alt="Delicious Food"
         />
       </div>
     </div>
-    <div class="flex justify-between items-center text-white px-4 py-2">
-      <div>
-        <span>Up to 3 times per day</span>
-      </div>
-      <div class="flex items-center justify-center">
-        <button class="bg-white text-black p-2 rounded-full">Order Now</button>
-      </div>
+    <div class="flex justify-between items-center text-white px-4 py-3 bg-black bg-opacity-10">
+      <span class="text-sm">Order now and save!</span>
+      <button
+        class="bg-white text-red-500 px-4 py-2 rounded-full text-sm font-semibold hover:bg-gray-100 transition-colors"
+      >
+        Order Now
+      </button>
     </div>
   </div>
-  <div>
-    <div class="flex justify-between items-center">
-      <div>
-        <h2 class="font-semibold text-lg text-gray-700">Categories</h2>
-      </div>
-      <div>
-        <a
-          routerLink="/categories"
-          class="text-red-500 font-medium hover:text-red-600 transition-colors cursor-pointer"
-          >See more</a
-        >
-      </div>
+
+  <div class="lg:bg-white lg:rounded-xl lg:p-6 lg:shadow-sm">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="font-semibold text-lg lg:text-xl text-gray-700 lg:text-gray-900">Categories</h2>
+      <a
+        routerLink="/categories"
+        class="text-red-500 font-medium hover:text-red-600 transition-colors cursor-pointer text-sm lg:text-base"
+      >
+        See more
+      </a>
     </div>
-    <div class="grid grid-cols-4 gap-4 mt-4">
+
+    <div class="grid grid-cols-4 lg:grid-cols-2 gap-3 lg:gap-4">
       @for (category of categories(); track category.id) {
       <app-categories-items
+        [id]="category.id"
         [title]="category.name"
         [imageUrl]="category.fotoUrl"
       ></app-categories-items>

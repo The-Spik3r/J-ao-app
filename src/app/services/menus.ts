@@ -80,7 +80,7 @@ export class MenusService {
         throw new Error(`HTTP error! status: ${res.status}`);
       }
       const data = (await res.json()) as MenuResponse;
-      await this.getAllMenus(); // Refresh the list
+      await this.getAllMenus();
       return data;
     } catch (error) {
       console.error('Error creating menu:', error);
@@ -101,16 +101,14 @@ export class MenusService {
         throw new Error(`HTTP error! status: ${res.status}`);
       }
 
-      // Handle 204 No Content response (successful update with no body)
       let data: MenuResponse;
       if (res.status === 204 || res.headers.get('content-length') === '0') {
-        // Create a mock response for 204 No Content
         data = { id, ...menu } as MenuResponse;
       } else {
         data = (await res.json()) as MenuResponse;
       }
 
-      await this.getAllMenus(); // Refresh the list
+      await this.getAllMenus();
       return data;
     } catch (error) {
       console.error('Error updating menu:', error);
@@ -129,7 +127,7 @@ export class MenusService {
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
       }
-      await this.getAllMenus(); // Refresh the list
+      await this.getAllMenus();
     } catch (error) {
       console.error('Error deleting menu:', error);
       throw error;

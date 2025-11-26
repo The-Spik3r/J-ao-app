@@ -33,8 +33,7 @@ interface CategoriesResponse {
 
 @Component({
   selector: 'app-all-categories',
-  standalone: true,
-  imports: [CommonModule, LucideAngularModule, CategoriesItems],
+  imports: [CommonModule, LucideAngularModule],
   templateUrl: './all-categories.html',
   styleUrl: './all-categories.css',
 })
@@ -113,8 +112,6 @@ export class AllCategories implements OnInit {
   }
 
   navigateToCategory(categoryId: number) {
-    // TODO: Navigate to category detail or menus filtered by category
-    console.log('Navigate to category:', categoryId);
-    // this.router.navigate(['/category', categoryId]);
+    this.router.navigate(['/category', categoryId]);
   }
 }

@@ -1,4 +1,5 @@
-import { Component, input } from '@angular/core';
+import { Component, input, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-market-stalls-items',
@@ -7,6 +8,13 @@ import { Component, input } from '@angular/core';
   styleUrl: './market-stalls-items.css',
 })
 export class MarketStallsItems {
+  private router = inject(Router);
+
+  id = input.required<number>();
   title = input.required<string>();
   location = input.required<string>();
+
+  navigateToDetail() {
+    this.router.navigate(['/market-stall', this.id()]);
+  }
 }

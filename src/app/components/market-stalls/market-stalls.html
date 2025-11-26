@@ -1,20 +1,25 @@
-<div class="w-full p-2 flex flex-col gap-4">
-  <div>
-    <div class="flex justify-between items-center">
+<div class="w-full p-2 lg:p-0 flex flex-col gap-4 lg:gap-6">
+  <div class="lg:bg-white lg:rounded-xl lg:p-6 lg:shadow-sm">
+    <div class="flex justify-between items-center mb-4 lg:mb-6">
       <div>
-        <h2 class="font-semibold text-lg text-gray-700">Market Stalls</h2>
+        <h2 class="font-semibold text-lg lg:text-2xl text-gray-700 lg:text-gray-900">
+          Market Stalls
+        </h2>
+        <p class="hidden lg:block text-gray-600 text-sm mt-1">Discover local food vendors</p>
       </div>
       <div>
         <a
           routerLink="/market-stalls"
-          class="text-red-500 font-medium hover:text-red-600 transition-colors cursor-pointer"
-          >See more</a
+          class="text-red-500 font-medium hover:text-red-600 transition-colors cursor-pointer text-sm lg:text-base"
+          >See all</a
         >
       </div>
     </div>
-    <div class="grid grid-cols-4 gap-4 mt-4">
+
+    <div class="grid grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-3 lg:gap-4 xl:gap-6">
       @for (stall of marketStalls(); track stall.id) {
       <app-market-stalls-items
+        [id]="stall.id"
         [title]="stall.name"
         [location]="stall.location"
       ></app-market-stalls-items>

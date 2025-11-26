@@ -9,7 +9,6 @@ import { MarketStallsService } from '../../../services/market-stalls';
 
 @Component({
   selector: 'app-admin-category-edit',
-  standalone: true,
   imports: [CommonModule, ReactiveFormsModule, LucideAngularModule],
   templateUrl: './admin-category-edit.html',
   styleUrl: './admin-category-edit.css',
@@ -63,10 +62,8 @@ export class AdminCategoryEditComponent implements OnInit {
   async loadCategories() {
     try {
       const categories = await this.categoriesService.getAllCategories();
-      // Filter categories by marketStallId
       this.categories = categories.filter((cat) => cat.marketStallId === this.marketStallId);
 
-      // If there are categories, select the first one for editing
       if (this.categories.length > 0) {
         const firstCategory = this.categories[0];
         this.categoryId = firstCategory.id;

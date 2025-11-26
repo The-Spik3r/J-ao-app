@@ -8,8 +8,7 @@ import { MarketStallsService } from '../../../services/market-stalls';
 
 @Component({
   selector: 'app-admin-category-delete',
-  standalone: true,
-  imports: [CommonModule, LucideAngularModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './admin-category-delete.html',
   styleUrl: './admin-category-delete.css',
 })
@@ -53,7 +52,6 @@ export class AdminCategoryDeleteComponent implements OnInit {
   async loadCategories() {
     try {
       const categories = await this.categoriesService.getAllCategories();
-      // Filter categories by marketStallId
       this.categories = categories.filter((cat) => cat.marketStallId === this.marketStallId);
       this.isLoading = false;
     } catch (error) {

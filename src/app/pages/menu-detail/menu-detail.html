@@ -1,3 +1,4 @@
+<p-toast position="top-center"></p-toast>
 @if (loading()) {
 <div class="min-h-screen flex items-center justify-center bg-gray-50">
   <div class="text-center">
@@ -106,7 +107,9 @@
             >
               −
             </button>
-            <span class="text-xl font-semibold min-w-12 text-center text-black">{{ quantity() }}</span>
+            <span class="text-xl font-semibold min-w-12 text-center text-black">{{
+              quantity()
+            }}</span>
             <button
               (click)="increaseQuantity()"
               [disabled]="quantity() >= menu()!.stock"

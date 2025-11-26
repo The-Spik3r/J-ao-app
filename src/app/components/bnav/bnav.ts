@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { LucideAngularModule, Home, Search, ShoppingCart, User } from 'lucide-angular';
 import { CartService } from '../../services/cart';
@@ -15,14 +15,11 @@ export class BNav {
   readonly ShoppingCart = ShoppingCart;
   readonly User = User;
 
+  private cartService = inject(CartService);
+  private router = inject(Router);
+
   activeTab = 'home';
 
-  constructor(
-    private cartService: CartService,
-    private router: Router
-  ) {}
-
-  // Exponer las propiedades del carrito para usar en el template
   get totalItems() {
     return this.cartService.totalItems();
   }
@@ -33,8 +30,7 @@ export class BNav {
 
   setActiveTab(tab: string) {
     this.activeTab = tab;
-    
-    // Navegar a las páginas correspondientes
+
     switch (tab) {
       case 'home':
         this.router.navigate(['/']);

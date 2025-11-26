@@ -1,26 +1,47 @@
-<div class="p-4 flex flex-col gap-3">
-  <div class="flex justify-between items-center">
-    <div>
-      <h2 class="font-semibold text-lg text-gray-700">Menus</h2>
+<div class="p-4 lg:p-0 flex flex-col gap-3 lg:gap-6">
+  <div class="lg:bg-white lg:rounded-xl lg:p-6 lg:shadow-sm">
+    <div class="flex justify-between items-center mb-4 lg:mb-6">
+      <div>
+        <h2 class="font-semibold text-lg lg:text-2xl text-gray-700 lg:text-gray-900">
+          Popular Menus
+        </h2>
+        <p class="hidden lg:block text-gray-600 text-sm mt-1">
+          Trending dishes from top-rated stalls
+        </p>
+      </div>
+      <div>
+        <a
+          routerLink="/menus"
+          class="text-red-500 font-medium hover:text-red-600 transition-colors cursor-pointer text-sm lg:text-base"
+          >See all</a
+        >
+      </div>
     </div>
-    <div>
-      <a
-        routerLink="/menus"
-        class="text-red-500 font-medium hover:text-red-600 transition-colors cursor-pointer"
-        >See more</a
+
+    <div class="flex lg:hidden flex-1 gap-3 overflow-x-auto pb-2 -mx-4 px-4">
+      @for (menu of MenuService.menus; track menu) {
+      <app-menu-items
+        [id]="menu.id"
+        [imagen]="menu.imageUrl"
+        [nombre]="menu.name"
+        [subtitulo]="menu.description"
+        [precio]="menu.price"
       >
+      </app-menu-items>
+      }
     </div>
-  </div>
-  <div class="flex flex-1 gap-2 overflow-x-auto">
-    @for (menu of MenuService.menus; track menu) {
-    <app-menu-items
-      [id]="menu.id"
-      [imagen]="menu.imageUrl"
-      [nombre]="menu.name"
-      [subtitulo]="menu.description"
-      [precio]="menu.price"
-    >
-    </app-menu-items>
-    }
+
+    <div class="hidden lg:grid lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
+      @for (menu of MenuService.menus; track menu) {
+      <app-menu-items
+        [id]="menu.id"
+        [imagen]="menu.imageUrl"
+        [nombre]="menu.name"
+        [subtitulo]="menu.description"
+        [precio]="menu.price"
+      >
+      </app-menu-items>
+      }
+    </div>
   </div>
 </div>

@@ -9,7 +9,8 @@
       <p class="text-gray-600 mt-2">Add a new item to your menu catalog</p>
     </div>
 
-    <div *ngIf="isLoading" class="bg-white rounded-lg shadow-md p-6">
+    @if (isLoading) {
+    <div class="bg-white rounded-lg shadow-md p-6">
       <div class="animate-pulse">
         <div class="h-4 bg-gray-200 rounded w-1/4 mb-4"></div>
         <div class="space-y-3">
@@ -18,14 +19,13 @@
         </div>
       </div>
     </div>
-
-    <div *ngIf="!isLoading" class="bg-white rounded-lg shadow-md p-6">
-      <div
-        *ngIf="errorMessage"
-        class="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded"
-      >
+    } @if (!isLoading) {
+    <div class="bg-white rounded-lg shadow-md p-6">
+      @if (errorMessage) {
+      <div class="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
         {{ errorMessage }}
       </div>
+      }
 
       <form [formGroup]="menuForm" (ngSubmit)="onSubmit()">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -38,12 +38,11 @@
               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
               placeholder="Enter menu item name"
             />
-            <div
-              *ngIf="menuForm.get('name')?.invalid && menuForm.get('name')?.touched"
-              class="text-red-600 text-sm mt-1"
-            >
+            @if (menuForm.get('name')?.invalid && menuForm.get('name')?.touched) {
+            <div class="text-red-600 text-sm mt-1">
               Name is required and must be at least 2 characters long.
             </div>
+            }
           </div>
 
           <div class="mb-4">
@@ -57,12 +56,11 @@
               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
               placeholder="0.00"
             />
-            <div
-              *ngIf="menuForm.get('price')?.invalid && menuForm.get('price')?.touched"
-              class="text-red-600 text-sm mt-1"
-            >
+            @if (menuForm.get('price')?.invalid && menuForm.get('price')?.touched) {
+            <div class="text-red-600 text-sm mt-1">
               Price is required and must be greater than 0.
             </div>
+            }
           </div>
 
           <div class="mb-4">
@@ -75,12 +73,9 @@
               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
               placeholder="0"
             />
-            <div
-              *ngIf="menuForm.get('stock')?.invalid && menuForm.get('stock')?.touched"
-              class="text-red-600 text-sm mt-1"
-            >
-              Stock is required and must be 0 or greater.
-            </div>
+            @if (menuForm.get('stock')?.invalid && menuForm.get('stock')?.touched) {
+            <div class="text-red-600 text-sm mt-1">Stock is required and must be 0 or greater.</div>
+            }
           </div>
 
           <div class="mb-4">
@@ -93,16 +88,15 @@
               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
             >
               <option value="0">Select a category</option>
-              <option *ngFor="let category of categories" [value]="category.id">
+              @for (category of categories; track category.id) {
+              <option [value]="category.id">
                 {{ category.name }}
               </option>
+              }
             </select>
-            <div
-              *ngIf="menuForm.get('categoryId')?.invalid && menuForm.get('categoryId')?.touched"
-              class="text-red-600 text-sm mt-1"
-            >
-              Please select a category.
-            </div>
+            @if (menuForm.get('categoryId')?.invalid && menuForm.get('categoryId')?.touched) {
+            <div class="text-red-600 text-sm mt-1">Please select a category.</div>
+            }
           </div>
         </div>
 
@@ -117,12 +111,11 @@
             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
             placeholder="Enter menu item description"
           ></textarea>
-          <div
-            *ngIf="menuForm.get('description')?.invalid && menuForm.get('description')?.touched"
-            class="text-red-600 text-sm mt-1"
-          >
+          @if (menuForm.get('description')?.invalid && menuForm.get('description')?.touched) {
+          <div class="text-red-600 text-sm mt-1">
             Description is required and must be at least 10 characters long.
           </div>
+          }
         </div>
 
         <div class="mb-4">
@@ -136,12 +129,9 @@
             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
             placeholder="https://example.com/image.jpg"
           />
-          <div
-            *ngIf="menuForm.get('imageUrl')?.invalid && menuForm.get('imageUrl')?.touched"
-            class="text-red-600 text-sm mt-1"
-          >
-            Image URL is required.
-          </div>
+          @if (menuForm.get('imageUrl')?.invalid && menuForm.get('imageUrl')?.touched) {
+          <div class="text-red-600 text-sm mt-1">Image URL is required.</div>
+          }
         </div>
 
         <div class="mb-6">
@@ -161,8 +151,11 @@
             [disabled]="menuForm.invalid || isSubmitting"
             class="flex-1 bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <span *ngIf="!isSubmitting">Create Menu Item</span>
-            <span *ngIf="isSubmitting">Creating...</span>
+            @if (!isSubmitting) {
+            <span>Create Menu Item</span>
+            } @else {
+            <span>Creating...</span>
+            }
           </button>
 
           <button
@@ -175,5 +168,6 @@
         </div>
       </form>
     </div>
+    }
   </div>
 </div>

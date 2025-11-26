@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { LucideAngularModule, ArrowLeft, Trash2, Plus, Minus, ShoppingBag } from 'lucide-angular';
@@ -17,7 +17,8 @@ export class Cart {
   readonly Minus = Minus;
   readonly ShoppingBag = ShoppingBag;
 
-  constructor(public cartService: CartService, private router: Router) {}
+  public cartService = inject(CartService);
+  private router = inject(Router);
 
   get cartItems() {
     return this.cartService.items();
@@ -59,8 +60,5 @@ export class Cart {
     this.cartService.clearCart();
   }
 
-  proceedToCheckout() {
-    // TODO: Implementar lógica de checkout
-    console.log('Proceeding to checkout...');
-  }
+  proceedToCheckout() {}
 }
