@@ -44,7 +44,7 @@ export class MenusService {
       }
       const data = (await res.json()) as any[];
       // Agregar valores por defecto si no vienen de la API
-      this.menus = data.map(menu => ({
+      this.menus = data.map((menu) => ({
         ...menu,
         isHappyHour: menu.isHappyHour ?? false,
         discountPercentage: menu.discountPercentage ?? 0,

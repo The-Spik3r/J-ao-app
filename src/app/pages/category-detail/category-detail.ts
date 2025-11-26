@@ -1,7 +1,14 @@
 import { Component, OnInit, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LucideAngularModule, ArrowLeft, Store, ShoppingCart, Star, Sparkles } from 'lucide-angular';
+import {
+  LucideAngularModule,
+  ArrowLeft,
+  Store,
+  ShoppingCart,
+  Star,
+  Sparkles,
+} from 'lucide-angular';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { CategoriesService } from '../../services/categories';
